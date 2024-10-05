@@ -2,12 +2,4 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: black;
-  color: white;
-}
 
-input {
-  background-color: black;
-  color: white;
-}
