@@ -21,7 +21,7 @@ export default function RegisterPage(props: RegisterPageProps) {
         username,
         password,
       })
-      .then((user) => (user ? router.push("/dashboard") : setStatus(user)))
+      .then((user) => (user ? router.push("/dashboard") : setStatus(user as string)))
       .catch((error) => setStatus(JSON.stringify(error)));
   };
 
