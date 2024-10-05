@@ -15,13 +15,13 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 
 interface LoginPageProps {}
 
 export default function LoginPage(props: LoginPageProps) {
   const router = useRouter();
   const { loginMutation } = AuthHook();
-  const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,9 +33,9 @@ export default function LoginPage(props: LoginPageProps) {
         password,
       })
       .then((user) =>
-        user ? router.push("/dashboard") : setStatus(user as string),
+        user ? router.push("/dashboard") : toast.error("Invalid credentials"),
       )
-      .catch((error) => setStatus(JSON.stringify(error)));
+      .catch(() => toast.error("Ein Fehler ist aufgetreten"));
   };
 
   return (
@@ -51,7 +51,14 @@ export default function LoginPage(props: LoginPageProps) {
           <div className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="username">Username</Label>
-              <Input id="username" type="text" placeholder="admin" required />
+              <Input
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                id="username"
+                type="text"
+                placeholder="admin"
+                required
+              />
             </div>
             <div className="grid gap-2">
               <div className="flex items-center">
@@ -63,17 +70,18 @@ export default function LoginPage(props: LoginPageProps) {
                   Forgot your password?
                 </Link>
               </div>
-              <Input id="password" type="password" required />
+              <Input
+                placeholder="password"
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
             </div>
             <Button type="submit" className="w-full">
               Login
             </Button>
-          </div>
-          <div className="mt-4 text-center text-sm">
-            Don&apos;t have an account?
-            <Link href="#" className="underline">
-              Sign up
-            </Link>
           </div>
         </CardContent>
       </Card>
