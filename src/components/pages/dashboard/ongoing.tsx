@@ -35,7 +35,7 @@ export const OngoingTournaments: React.FC<{ tournaments: Tournament[] }> = ({
                 <div>
                   <p className="font-medium">{tournament.tournament_name}</p>
                   <p className="text-sm text-muted-foreground">
-                    {tournament.max_participants} participants
+                    {tournament.max_participants} Max participants
                   </p>
                 </div>
                 <div className="font-medium">{tournament.status}</div>

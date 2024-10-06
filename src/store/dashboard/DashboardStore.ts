@@ -6,9 +6,9 @@ export type DashboardStore = typeof DashboardStore;
 
 export const DashboardStore = proxy({
   tabs: [
-    { name: "Dashboard", href: "/", icon: FiLayout },
-    { name: "Tournaments", href: "/tournaments", icon: IoIosTrophy },
-    { name: "Participants", href: "/participants", icon: FiUsers },
-    { name: "Brackets", href: "/brackets", icon: FiGitBranch },
+    { name: "Dashboard", href: "/dashboard/", icon: FiLayout },
+    { name: "Tournaments", href: "/dashboard/tournaments", icon: IoIosTrophy },
+    { name: "Participants", href: "/dashboard/participants", icon: FiUsers },
+    { name: "Brackets", href: "/dashboard/brackets", icon: FiGitBranch },
   ],
 });

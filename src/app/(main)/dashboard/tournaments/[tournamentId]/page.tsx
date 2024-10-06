@@ -10,7 +10,7 @@ const page: React.FC<pageProps> = ({}) => {
 
   return (
     <div>
-      <div></div>
+      <div>Tournaments</div>
     </div>
   );
 };

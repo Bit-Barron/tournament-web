@@ -9,12 +9,14 @@ import { FaTrophy } from "react-icons/fa";
 import { CiMenuBurger, CiSearch, CiBellOn } from "react-icons/ci";
 import { UserHook } from "../hooks/user-hook";
 import { ThemeToggle } from "../utils/theme-switch";
+import { useRouter } from "next/navigation";
 
 export const Navbar = () => {
   const dashboardStore = useSnapshot(DashboardStore);
   const [activeTab, setActiveTab] = useState<string>("Dashboard");
   const { meQuery } = UserHook();
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const router = useRouter();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -32,7 +34,10 @@ export const Navbar = () => {
                 key={item.name}
                 variant="ghost"
                 className={`h-8 ${activeTab === item.name ? "bg-muted" : ""}`}
-                onClick={() => setActiveTab(item.name)}
+                onClick={() => {
+                  setActiveTab(item.name);
+                  router.push(item.href);
+                }}
               >
                 <item.icon className="mr-2 h-4 w-4" />
                 <span className="font-normal">{item.name}</span>

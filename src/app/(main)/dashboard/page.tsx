@@ -24,7 +24,6 @@ export default function MainPage() {
 
   return (
     <main>
-      <Navbar />
       <div className="bg-background p-8">
         <div className="mb-8 flex items-center justify-between">
           <div className="flex space-x-2 text-3xl font-bold">

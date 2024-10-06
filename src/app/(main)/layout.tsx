@@ -1,3 +1,4 @@
+import { Navbar } from "@/components/container/navbar";
 import getQueryClient from "@/lib/react-query";
 import { rpc } from "@/lib/rpc";
 import { setCookies } from "@/utils/server";
@@ -22,6 +23,7 @@ export default async function MainLayout(props: MainLayoutProps) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
+      <Navbar />
       {props.children}
     </HydrationBoundary>
   );
