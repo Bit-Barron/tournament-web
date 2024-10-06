@@ -8,6 +8,7 @@ import { useSnapshot } from "valtio";
 import { FaTrophy } from "react-icons/fa";
 import { CiMenuBurger, CiSearch, CiBellOn } from "react-icons/ci";
 import { UserHook } from "../hooks/user-hook";
+import { ThemeToggle } from "../utils/theme-switch";
 
 export const Navbar = () => {
   const dashboardStore = useSnapshot(DashboardStore);
@@ -62,6 +63,7 @@ export const Navbar = () => {
           <Button variant="outline" size="sm" className="h-8">
             Create Tournament
           </Button>
+          <ThemeToggle />
         </div>
       </div>
       {mobileMenuOpen && (
