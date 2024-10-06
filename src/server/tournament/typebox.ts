@@ -1,3 +1,4 @@
+import { GAMETYPE } from "@/types/enum";
 import { t } from "elysia";
 
 export const tournamentSchema = t.Object({
