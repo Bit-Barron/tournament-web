@@ -23,6 +23,8 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
         },
       });
 
+      console.log(tournament);
+
       return tournament;
     },
     {

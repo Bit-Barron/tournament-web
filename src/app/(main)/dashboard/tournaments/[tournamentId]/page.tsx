@@ -8,8 +8,6 @@ interface pageProps {}
 const page: React.FC<pageProps> = ({}) => {
   const { tournamentIdQuery } = TournamentHook();
 
-  console.log(tournamentIdQuery.data);
-
   return (
     <div>
       <div></div>
