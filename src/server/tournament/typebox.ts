@@ -1,5 +1,10 @@
-import { GAMETYPE } from "@/types/enum";
 import { t } from "elysia";
+
+export enum GAMETYPE {
+  SOLO = "SOLO",
+  DUO = "DUO",
+  TRIOS = "TRIOS",
+}
 
 export const tournamentSchema = t.Object({
   tournamentId: t.String({ minLength: 1, maxLength: 128 }),
