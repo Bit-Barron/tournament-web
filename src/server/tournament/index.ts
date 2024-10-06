@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import Elysia from "elysia";
-import { tournamentSchema } from "./typebox";
+import { tournamentCreateSchema, tournamentSchema } from "./typebox";
 
 export const tournamentRoute = new Elysia({ prefix: "/tournament" })
   .get("", async () => {
@@ -26,4 +26,28 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
     {
       params: tournamentSchema,
     },
+  )
+  .post(
+    "",
+    async (ctx) => {
+      const {
+        tournament_name,
+        game_type,
+        max_participants,
+        start_date,
+        hosted_by,
+      } = ctx.body;
+      const tournament = await prisma.tournament.create({
+        data: {
+          tournament_name,
+          game_type,
+          max_participants,
+          start_date,
+          hosted_by,
+        },
+      });
+
+      return tournament;
+    },
+    { body: tournamentCreateSchema },
   );
