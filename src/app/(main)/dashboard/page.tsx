@@ -1,5 +1,6 @@
 "use client";
 
+import { Navbar } from "@/components/container/navbar";
 import { UserHook } from "@/components/hooks/user-hook";
 import Link from "next/link";
 
@@ -10,11 +11,8 @@ export default function MainPage(props: MainPageProps) {
 
   return (
     <main>
-      <div>id: {meQuery.data?.id}</div>
-      <div>user: {meQuery.data?.username}</div>
-      <Link className="bg-red-500" href="/logout">
-        Logout
-      </Link>
+      <Navbar />
+      <h1>Hello, {meQuery.data?.username}</h1>
     </main>
   );
 }
