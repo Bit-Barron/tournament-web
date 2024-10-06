@@ -18,9 +18,7 @@ interface MainPageProps {}
 export default function MainPage(props: MainPageProps) {
   const { tournamentQuery, tournamentUserQuery } = TournamentHook();
   const tournamentData = tournamentQuery.data || [];
-  // const tournamentUserData = tournamentUserQuery.data || [];
-
-  console.log(tournamentData);
+  const tournamentUserData = tournamentUserQuery.data || [];
 
   return (
     <main>
@@ -39,7 +37,7 @@ export default function MainPage(props: MainPageProps) {
           />
           <MyCard
             cardTitle="Active Players"
-            cardStat={tournamentData.length || 0}
+            cardStat={tournamentUserData.length || 0}
             lastMonth={"+18 from last week"}
             CardIcon={FaUsers}
           />

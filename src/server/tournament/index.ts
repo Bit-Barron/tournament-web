@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import Elysia from "elysia";
+import { tournamentSchema } from "./typebox";
 
 export const tournamentRoute = new Elysia({ prefix: "/tournament" })
   .get("", async () => {
@@ -11,4 +12,20 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
     const tournament = await prisma.user.findMany();
 
     return tournament;
-  });
+  })
+  .get(
+    "/:id",
+    async (ctx) => {
+      const { tournamentId } = ctx.params;
+      const tournament = await prisma.tournament.findUnique({
+        where: {
+          id: Number(tournamentId),
+        },
+      });
+
+      return tournament;
+    },
+    {
+      params: tournamentSchema,
+    },
+  );
