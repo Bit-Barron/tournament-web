@@ -3,6 +3,7 @@
 import { Navbar } from "@/components/container/navbar";
 import { MyCard } from "@/components/elements/my-card";
 import { TournamentHook } from "@/components/hooks/tournament-hook";
+import { UserHook } from "@/components/hooks/user-hook";
 import { OngoingTournaments } from "@/components/pages/dashboard/ongoing";
 import { RecentResults } from "@/components/pages/dashboard/recent-results";
 import { UpcomingMatches } from "@/components/pages/dashboard/upcoming-matches";
@@ -15,7 +16,8 @@ import { FaCalendarAlt, FaDollarSign, FaTrophy, FaUsers } from "react-icons/fa";
 
 interface MainPageProps {}
 
-export default function MainPage(props: MainPageProps) {
+export default function MainPage() {
+  const { meQuery } = UserHook();
   const { tournamentQuery, tournamentUserQuery } = TournamentHook();
   const tournamentData = tournamentQuery.data || [];
   const tournamentUserData = tournamentUserQuery.data || [];
@@ -25,9 +27,17 @@ export default function MainPage(props: MainPageProps) {
       <Navbar />
       <div className="bg-background p-8">
         <div className="mb-8 flex items-center justify-between">
-          <h1 className="text-3xl font-bold">Tournament Dashboard</h1>
+          <div className="flex space-x-2 text-3xl font-bold">
+            <h1>Hello,</h1>
+            <span>
+              {meQuery.data?.username[0].toUpperCase() +
+                (meQuery.data?.username?.slice(1) ?? "")}
+            </span>
+          </div>
+
           <Button>Create Tournament</Button>
         </div>
+
         <div className="mb-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <MyCard
             cardTitle="Total Tournaments"
