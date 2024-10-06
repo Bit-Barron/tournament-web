@@ -10,6 +10,5 @@ export const DashboardStore = proxy({
     { name: "Tournaments", href: "/tournaments", icon: IoIosTrophy },
     { name: "Participants", href: "/participants", icon: FiUsers },
     { name: "Brackets", href: "/brackets", icon: FiGitBranch },
-    { name: "Settings", href: "/settings", icon: FiSettings },
   ],
 });

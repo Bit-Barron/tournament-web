@@ -5,12 +5,10 @@ import { tournamentSchema } from "./typebox";
 export const tournamentRoute = new Elysia({ prefix: "/tournament" })
   .get("", async () => {
     const tournament = await prisma.tournament.findMany();
-
     return tournament;
   })
   .get("/user", async () => {
     const tournament = await prisma.user.findMany();
-
     return tournament;
   })
   .get(
@@ -22,8 +20,6 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
           id: Number(tournamentId),
         },
       });
-
-      console.log(tournament);
 
       return tournament;
     },

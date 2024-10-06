@@ -1,7 +1,8 @@
 import QueryProvider from "@/components/providers/query-provider";
-import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Navbar } from "@/components/container/navbar";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import "./globals.css";
 
 export default function RootLayout({
   children,
@@ -9,8 +10,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className="h-full">
+      <body className="h-full">
         <QueryProvider>
           <ThemeProvider
             attribute="class"
@@ -18,7 +19,9 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <div className="flex h-full flex-col">
+              <ScrollArea className="flex-grow">{children}</ScrollArea>
+            </div>
           </ThemeProvider>
         </QueryProvider>
       </body>
