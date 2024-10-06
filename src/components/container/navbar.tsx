@@ -48,7 +48,7 @@ export const Navbar = () => {
         <Button
           variant="outline"
           size="sm"
-          className="ml-auto h-8 lg:hidden"
+          className="h-8 lg:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           <CiMenuBurger className="h-4 w-4" />
@@ -87,7 +87,7 @@ export const Navbar = () => {
       </div>
       {mobileMenuOpen && (
         <div className="md:hidden">
-          <div className="space-y-1 px-2 pb-3 pt-2">
+          <div className="grid grid-cols-2 px-2 pb-3 pt-2">
             {dashboardStore.tabs.map((item) => (
               <Button
                 key={item.name}
