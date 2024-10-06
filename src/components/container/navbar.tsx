@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { DashboardStore } from "@/store/DashboardStore";
+import { DashboardStore } from "@/store/dashboard/DashboardStore";
 import { useSnapshot } from "valtio";
 import { FaTrophy } from "react-icons/fa";
 import { CiMenuBurger, CiSearch, CiBellOn } from "react-icons/ci";

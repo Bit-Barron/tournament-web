@@ -1,4 +1,5 @@
 import { authRoute } from "@/server/auth";
+import { tournamentRoute } from "@/server/tournament";
 import { userRoute } from "@/server/user";
 import { Elysia } from "elysia";
 
@@ -8,7 +9,8 @@ import { Elysia } from "elysia";
  */
 const app = new Elysia({ prefix: "/api", aot: false })
   .use(userRoute)
-  .use(authRoute);
+  .use(authRoute)
+  .use(tournamentRoute);
 
 /**
  * Export the app type for use with RPC clients (e.g., edenTreaty)

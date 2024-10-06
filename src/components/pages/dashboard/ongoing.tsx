@@ -1,9 +1,13 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 interface Tournament {
-  name: string;
-  participants: number;
-  progress: number;
+  id: number;
+  tournament_name: string;
+  start_date: Date;
+  game_type: any;
+  status: any;
+  max_participants: number;
+  hosted_by: string;
 }
 
 export const OngoingTournaments: React.FC<{ tournaments: Tournament[] }> = ({
@@ -16,16 +20,16 @@ export const OngoingTournaments: React.FC<{ tournaments: Tournament[] }> = ({
     <CardContent>
       <div className="space-y-8">
         {tournaments.map((tournament) => (
-          <div className="flex items-center" key={tournament.name}>
+          <div className="flex items-center" key={tournament.tournament_name}>
             <div className="ml-4 space-y-1">
               <p className="text-sm font-medium leading-none">
-                {tournament.name}
+                {tournament.tournament_name}
               </p>
               <p className="text-sm text-muted-foreground">
-                {tournament.participants} participants
+                {tournament.max_participants} participants
               </p>
             </div>
-            <div className="ml-auto font-medium">{tournament.progress}%</div>
+            <div className="ml-auto font-medium">{tournament.status}</div>
           </div>
         ))}
       </div>
