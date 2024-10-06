@@ -17,9 +17,9 @@ import { UserHook } from "../hooks/user-hook";
 
 export const Navbar = () => {
   const dashboardStore = useSnapshot(DashboardStore);
-  const [activeTab, setActiveTab] = useState("Dashboard");
+  const [activeTab, setActiveTab] = useState<string>("Dashboard");
   const { meQuery } = UserHook();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
