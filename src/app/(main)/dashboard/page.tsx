@@ -18,14 +18,16 @@ interface MainPageProps {}
 export default function MainPage(props: MainPageProps) {
   const { tournamentQuery, tournamentUserQuery } = TournamentHook();
   const tournamentData = tournamentQuery.data || [];
-  const tournamentUserData = tournamentUserQuery.data || [];
+  // const tournamentUserData = tournamentUserQuery.data || [];
+
+  console.log(tournamentData);
 
   return (
     <main>
       <Navbar />
       <div className="bg-background p-8">
         <div className="mb-8 flex items-center justify-between">
-          <h1 className="text-4xl font-bold">Tournament Dashboard</h1>
+          <h1 className="text-3xl font-bold">Tournament Dashboard</h1>
           <Button>Create Tournament</Button>
         </div>
         <div className="mb-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -37,7 +39,7 @@ export default function MainPage(props: MainPageProps) {
           />
           <MyCard
             cardTitle="Active Players"
-            cardStat={tournamentUserData.length || 0}
+            cardStat={tournamentData.length || 0}
             lastMonth={"+18 from last week"}
             CardIcon={FaUsers}
           />

@@ -21,11 +21,11 @@ export const Navbar = () => {
         <div className="mr-4 hidden md:flex">
           <a className="mr-6 flex items-center space-x-2" href="/">
             <FaTrophy className="h-6 w-6" />
-            <span className="hidden font-bold sm:inline-block">
+            <span className="hidden sm:inline-block">
               {meQuery?.data?.username}
             </span>
           </a>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
+          <nav className="flex items-center space-x-6">
             {dashboardStore.tabs.map((item) => (
               <Button
                 key={item.name}

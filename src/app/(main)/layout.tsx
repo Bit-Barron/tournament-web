@@ -15,8 +15,6 @@ export default async function MainLayout(props: MainLayoutProps) {
   // Fetch current user data set cookies are required else they will be empty
   const { data: me, error: meError } = await rpc.api.user.me.get(setCookies());
 
-  console.log(me);
-
   if (meError) redirect("/login");
 
   // Set the fetched user data in the query client cache `src/components/hooks/user-hook.ts`

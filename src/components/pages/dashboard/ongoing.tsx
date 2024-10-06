@@ -1,4 +1,5 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Tournament {
   id: number;
@@ -18,21 +19,24 @@ export const OngoingTournaments: React.FC<{ tournaments: Tournament[] }> = ({
       <CardTitle>Ongoing Tournaments</CardTitle>
     </CardHeader>
     <CardContent>
-      <div className="space-y-8">
-        {tournaments.map((tournament) => (
-          <div className="flex items-center" key={tournament.tournament_name}>
-            <div className="ml-4 space-y-1">
-              <p className="text-sm font-medium leading-none">
-                {tournament.tournament_name}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                {tournament.max_participants} participants
-              </p>
+      <ScrollArea className="h-[300px]">
+        <div className="pr-4">
+          {tournaments.map((tournament) => (
+            <div
+              key={tournament.id}
+              className="flex items-center justify-between py-2"
+            >
+              <div>
+                <p className="font-medium">{tournament.tournament_name}</p>
+                <p className="text-sm text-muted-foreground">
+                  {tournament.max_participants} participants
+                </p>
+              </div>
+              <div className="font-medium">{tournament.status}</div>
             </div>
-            <div className="ml-auto font-medium">{tournament.status}</div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </ScrollArea>
     </CardContent>
   </Card>
 );
