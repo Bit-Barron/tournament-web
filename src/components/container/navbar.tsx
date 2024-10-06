@@ -1,14 +1,8 @@
+"use client";
+
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-} from "@radix-ui/react-dropdown-menu";
 import { DashboardStore } from "@/store/DashboardStore";
 import { useSnapshot } from "valtio";
 import { FaTrophy } from "react-icons/fa";
@@ -68,21 +62,6 @@ export const Navbar = () => {
           <Button variant="outline" size="sm" className="h-8">
             Create Tournament
           </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <CiBellOn className="h-4 w-4" />
-                <span className="sr-only">Notifications</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Notifications</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>New tournament request</DropdownMenuItem>
-              <DropdownMenuItem>Participant approval needed</DropdownMenuItem>
-              <DropdownMenuItem>Tournament results ready</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
         </div>
       </div>
       {mobileMenuOpen && (
