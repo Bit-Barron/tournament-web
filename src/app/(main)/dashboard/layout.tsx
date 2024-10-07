@@ -13,7 +13,8 @@ const layout: React.FC<layoutProps> = async ({ children }) => {
   await queryClient.prefetchQuery({
     queryKey: ["tournaments"],
     queryFn: async () => {
-      const { data } = await rpc.api.tournament.get();
+      const { data } = await rpc.api.tournament.all.get();
+      console.log(data);
       return data;
     },
   });

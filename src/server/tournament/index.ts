@@ -3,7 +3,7 @@ import Elysia from "elysia";
 import { tournamentCreateSchema, tournamentSchema } from "./typebox";
 
 export const tournamentRoute = new Elysia({ prefix: "/tournament" })
-  .get("", async () => {
+  .get("/all", async () => {
     const tournament = await prisma.tournament.findMany();
 
     console.log("Fetched tournaments:", tournament);
