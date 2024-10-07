@@ -76,8 +76,13 @@ export const CreateTournament: React.FC<CreateTournamentProps> = ({
             value={tournamentStore.hostedBy}
             onChange={(e) => tournamentStore.hostedBy}
           />
+          <Input
+            placeholder="Hosted By"
+            value={tournamentStore.startDate as unknown as string}
+            disabled
+          />
 
-          <Button className="w-full">Create</Button>
+          <Button className="w-full">Create Tournament</Button>
         </form>
       </DialogContent>
     </Dialog>
