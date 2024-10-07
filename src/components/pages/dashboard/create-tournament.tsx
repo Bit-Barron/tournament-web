@@ -1,4 +1,4 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import { Button, ButtonProps } from "@/components/ui/button";
 import {
   Dialog,
@@ -24,6 +24,7 @@ export const CreateTournament: React.FC<CreateTournamentProps> = ({
 }) => {
   const tournamentStore = useSnapshot(TournamentStore);
   const { tournamentMutation } = TournamentHook();
+  const [open, setOpen] = useState<boolean>(false);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -37,6 +38,7 @@ export const CreateTournament: React.FC<CreateTournamentProps> = ({
       })
       .then(() => {
         toast.success("Tournament created successfully");
+        setOpen(false);
       })
       .catch(() => {
         toast.error("Failed to create tournament");
@@ -44,7 +46,7 @@ export const CreateTournament: React.FC<CreateTournamentProps> = ({
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant={variant || "default"}>Create Tournament</Button>
       </DialogTrigger>
@@ -60,26 +62,31 @@ export const CreateTournament: React.FC<CreateTournamentProps> = ({
             placeholder="Tournament Name"
             value={tournamentStore.tournamentName}
             onChange={(e) => tournamentStore.tournamentName}
+            required
           />
           <Input
             placeholder="Game Type"
             value={tournamentStore.gameType}
             onChange={(e) => tournamentStore.gameType}
+            required
           />
           <Input
             placeholder="Max Participants"
             value={tournamentStore.maxParticipants}
             onChange={(e) => tournamentStore.maxParticipants}
+            required
           />
           <Input
             placeholder="Hosted By"
             value={tournamentStore.hostedBy}
             onChange={(e) => tournamentStore.hostedBy}
+            required
           />
           <Input
             placeholder="Hosted By"
             value={tournamentStore.startDate as unknown as string}
             disabled
+            required
           />
 
           <Button className="w-full">Create Tournament</Button>
