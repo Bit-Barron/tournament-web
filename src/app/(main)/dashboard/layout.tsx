@@ -14,10 +14,11 @@ const layout: React.FC<layoutProps> = async ({ children }) => {
     queryKey: ["tournaments"],
     queryFn: async () => {
       const { data } = await rpc.api.tournament.all.get();
-      console.log(data);
+
       return data;
     },
   });
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       {children}
