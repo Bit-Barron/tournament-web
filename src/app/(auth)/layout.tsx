@@ -22,7 +22,6 @@ export default async function AuthLayout(props: AuthLayoutProps) {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <main className="flex h-screen">
-        <Toaster richColors position="top-right" />
         <section className="m-auto w-full max-w-[500px] p-5">
           {props.children}
         </section>

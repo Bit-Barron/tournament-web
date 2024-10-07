@@ -1,6 +1,6 @@
 import { rpc } from "@/lib/rpc";
 import { handleEden } from "@/utils/base";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 
 export const TournamentHook = () => {
@@ -28,5 +28,15 @@ export const TournamentHook = () => {
     },
   });
 
-  return { tournamentQuery, tournamentUserQuery, tournamentIdQuery };
+  const tournamentMutation = useMutation({
+    mutationFn: async (...args: Parameters<typeof rpc.api.tournament.post>) =>
+      handleEden(await rpc.api.tournament.post(...args)),
+  });
+
+  return {
+    tournamentQuery,
+    tournamentUserQuery,
+    tournamentIdQuery,
+    tournamentMutation,
+  };
 };

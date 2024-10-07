@@ -4,6 +4,7 @@ import { rpc } from "@/lib/rpc";
 import { setCookies } from "@/utils/server";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { redirect } from "next/navigation";
+import { Toaster } from "sonner";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -24,6 +25,7 @@ export default async function MainLayout(props: MainLayoutProps) {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Navbar />
+
       {props.children}
     </HydrationBoundary>
   );
