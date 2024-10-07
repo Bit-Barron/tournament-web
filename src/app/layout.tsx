@@ -1,6 +1,5 @@
 import QueryProvider from "@/components/providers/query-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { Navbar } from "@/components/container/navbar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import "./globals.css";
 

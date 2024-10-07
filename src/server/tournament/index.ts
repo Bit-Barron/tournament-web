@@ -6,8 +6,6 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
   .get("/all", async () => {
     const tournament = await prisma.tournament.findMany();
 
-    console.log("Fetched tournaments:", tournament);
-
     return tournament;
   })
   .get("/user", async () => {
@@ -18,7 +16,6 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
     "/:id",
     async (ctx) => {
       const { tournamentId } = ctx.params;
-      console.log("test", tournamentId);
       const tournament = await prisma.tournament.findUnique({
         where: {
           id: Number(tournamentId),

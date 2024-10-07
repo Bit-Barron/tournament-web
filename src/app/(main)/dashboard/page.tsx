@@ -1,6 +1,5 @@
 "use client";
 
-import { Navbar } from "@/components/container/navbar";
 import { MyCard } from "@/components/elements/my-card";
 import { TournamentHook } from "@/components/hooks/tournament-hook";
 import { UserHook } from "@/components/hooks/user-hook";

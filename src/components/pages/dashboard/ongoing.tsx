@@ -29,7 +29,7 @@ export const OngoingTournaments: React.FC<{ tournaments: Tournament[] }> = ({
                 key={tournament.id}
                 className="flex items-center justify-between py-2"
                 onClick={() =>
-                  router.push(`/dashboard/tournaments/${tournament.id}`)
+                  router.push(`/dashboard/tournament/${tournament.id}`)
                 }
               >
                 <div>
