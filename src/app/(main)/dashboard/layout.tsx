@@ -9,12 +9,14 @@ interface layoutProps {
 
 const layout: React.FC<layoutProps> = async ({ children }) => {
   const queryClient = getQueryClient();
-  const tournamentData = await rpc.api.tournament.get();
-  // const tournamentUserData = await rpc.api.tournament.user.get();
 
-  queryClient.setQueryData(["tournament"], tournamentData.data);
-  // queryClient.setQueryData(["tournamentUser"], tournamentUserData.data);
-
+  await queryClient.prefetchQuery({
+    queryKey: ["tournaments"],
+    queryFn: async () => {
+      const { data } = await rpc.api.tournament.get();
+      return data;
+    },
+  });
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       {children}
