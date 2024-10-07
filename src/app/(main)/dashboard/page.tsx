@@ -3,6 +3,7 @@
 import { MyCard } from "@/components/elements/my-card";
 import { TournamentHook } from "@/components/hooks/tournament-hook";
 import { UserHook } from "@/components/hooks/user-hook";
+import { CreateTournament } from "@/components/pages/dashboard/create-tournament";
 import { OngoingTournaments } from "@/components/pages/dashboard/ongoing";
 import { RecentResults } from "@/components/pages/dashboard/recent-results";
 import { UpcomingMatches } from "@/components/pages/dashboard/upcoming-matches";
@@ -33,7 +34,7 @@ export default function MainPage() {
             </span>
           </div>
 
-          <Button>Create Tournament</Button>
+          <CreateTournament />
         </div>
 
         <div className="mb-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
