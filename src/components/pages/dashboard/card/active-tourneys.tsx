@@ -22,6 +22,11 @@ export const OngoingTournaments: React.FC<{ tournaments: Tournament[] }> = ({
         <CardTitle>Ongoing Tournaments</CardTitle>
       </CardHeader>
       <CardContent>
+        {tournaments.length === 0 && (
+          <p className="text-center text-muted-foreground">
+            No ongoing tournaments
+          </p>
+        )}
         <ScrollArea className="h-[300px]">
           <div className="pr-4">
             {tournaments.map((tournament) => (

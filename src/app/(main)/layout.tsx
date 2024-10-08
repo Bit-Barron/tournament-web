@@ -21,7 +21,6 @@ export default async function MainLayout(props: MainLayoutProps) {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Navbar />
-
       {props.children}
     </HydrationBoundary>
   );
