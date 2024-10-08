@@ -13,7 +13,6 @@ export const TournamentHook = () => {
 
   const tournamentUserQuery = useQuery({
     queryKey: ["tournament"],
-    enabled: false,
     queryFn: async () => handleEden(await rpc.api.tournament.user.get()),
   });
 
