@@ -12,7 +12,7 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
     const tournament = await prisma.user.findMany();
     return tournament;
   })
-  .get(
+  .post(
     "/id",
     async (ctx) => {
       const { tournamentId } = ctx.body;

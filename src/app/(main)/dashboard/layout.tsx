@@ -17,6 +17,15 @@ const layout: React.FC<layoutProps> = async ({ children }) => {
     queryFn: async () => handleEden(await rpc.api.tournament.get()),
   });
 
+  await queryClient.prefetchQuery({
+    queryKey: ["tournament"],
+    queryFn: async () => {
+      const { data } = await rpc.api.tournament.user.get();
+
+      return data;
+    },
+  });
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       {children}
