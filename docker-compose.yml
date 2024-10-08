@@ -10,10 +10,12 @@ services:
         - SECRET=${SECRET}
         - DATABASE_URL=${DATABASE_URL}
         - NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
+        - NEXT_PUBLIC_PRICE_POOL=${NEXT_PUBLIC_PRICE_POOL}
     environment:
       - SECRET=${SECRET}
       - DATABASE_URL=${DATABASE_URL}
       - NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
+      - NEXT_PUBLIC_PRICE_POOL=${NEXT_PUBLIC_PRICE_POOL}
     networks:
       - proxy
     labels:
