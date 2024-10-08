@@ -25,3 +25,4 @@ export default async function MainLayout(props: MainLayoutProps) {
     </HydrationBoundary>
   );
 }
+export const dynamic = "force-dynamic";
