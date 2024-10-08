@@ -26,6 +26,7 @@ const TournamentPage: React.FC<PageProps> = () => {
         tournamentId: id,
       });
       toast.success("Tournament deleted successfully");
+      tournamentQuery.refetch();
     } catch (error) {
       toast.error("Failed to delete tournament");
       console.error("Failed to delete tournament:", error);

@@ -18,7 +18,7 @@ const layout: React.FC<layoutProps> = async ({ children, params }) => {
     queryFn: async () => {
       const { data } = await rpc.api.tournament[tournament].get();
 
-      console.log(data);
+      console.log("fetched data", data)
       return data;
     },
   });

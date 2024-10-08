@@ -3,7 +3,7 @@ import Elysia from "elysia";
 import { tournamentCreateSchema, tournamentSchema } from "./typebox";
 
 export const tournamentRoute = new Elysia({ prefix: "/tournament" })
-  .get("/all", async () => {
+  .get("", async () => {
     const tournament = await prisma.tournament.findMany();
 
     return tournament;
@@ -53,7 +53,7 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
     { body: tournamentCreateSchema },
   )
   .delete(
-    "/delete",
+    "",
     async (ctx) => {
       const { tournamentId } = ctx.body;
       const tournament = await prisma.tournament.delete({

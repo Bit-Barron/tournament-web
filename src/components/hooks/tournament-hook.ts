@@ -8,7 +8,7 @@ export const TournamentHook = () => {
 
   const tournamentQuery = useQuery({
     queryKey: ["tournaments"],
-    queryFn: async () => handleEden(await rpc.api.tournament.all.get()),
+    queryFn: async () => handleEden(await rpc.api.tournament.get()),
   });
 
   const tournamentUserQuery = useQuery({
@@ -34,9 +34,8 @@ export const TournamentHook = () => {
   });
 
   const tournamentDeleteMutation = useMutation({
-    mutationFn: async (
-      ...args: Parameters<typeof rpc.api.tournament.delete.delete>
-    ) => handleEden(await rpc.api.tournament.delete.delete(...args)),
+    mutationFn: async (...args: Parameters<typeof rpc.api.tournament.delete>) =>
+      handleEden(await rpc.api.tournament.delete(...args)),
   });
 
   return {

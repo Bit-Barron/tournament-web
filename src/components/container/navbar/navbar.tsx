@@ -10,6 +10,7 @@ import { UserHook } from "@/components/hooks/user-hook";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ThemeToggle } from "@/components/utils/theme-switch";
+import { CreateTournament } from "@/components/pages/dashboard/create-tourney";
 
 export const Navbar = () => {
   const dashboardStore = useSnapshot(DashboardStore);
@@ -33,7 +34,7 @@ export const Navbar = () => {
               <Button
                 key={item.name}
                 variant="ghost"
-                className={`h-8 ${activeTab === item.name ? "bg-muted" : ""}`}
+                className={`h-8`}
                 onClick={() => {
                   setActiveTab(item.name);
                   router.push(item.href);
@@ -65,9 +66,7 @@ export const Navbar = () => {
               />
             </div>
           </form>
-          <Button variant="outline" size="sm" className="h-8">
-            Create Tournament
-          </Button>
+          <CreateTournament variant={"ghost"} />
           <ThemeToggle />
         </div>
       </div>
