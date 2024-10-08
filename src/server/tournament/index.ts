@@ -13,9 +13,10 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
     return tournament;
   })
   .get(
-    "/:id",
+    "/id",
     async (ctx) => {
-      const { tournamentId } = ctx.params;
+      const { tournamentId } = ctx.body;
+      console.log("tournamentID", tournamentId);
       const tournament = await prisma.tournament.findUnique({
         where: {
           id: Number(tournamentId),
@@ -25,7 +26,7 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
       return tournament;
     },
     {
-      params: tournamentSchema,
+      body: tournamentSchema,
     },
   )
   .post(

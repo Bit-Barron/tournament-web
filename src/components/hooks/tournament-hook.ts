@@ -23,7 +23,7 @@ export const TournamentHook = () => {
       if (typeof params.orderId !== "string")
         throw new Error("Invalid orderId");
       return handleEden(
-        await rpc.api.tournament[params.tournamentId as string].get(),
+        await rpc.api.tournament.id.get(params.tournamentId as any),
       );
     },
   });

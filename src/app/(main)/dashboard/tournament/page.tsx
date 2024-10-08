@@ -10,6 +10,7 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { CalendarDays, MapPin, Users, Trash2Icon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "sonner";
 
@@ -19,6 +20,7 @@ const TournamentPage: React.FC<PageProps> = () => {
   const { tournamentQuery } = TournamentHook();
   const { tournamentDeleteMutation } = TournamentHook();
   const tournaments = tournamentQuery.data || [];
+  const router = useRouter();
 
   const handleDelete = async (id: number) => {
     try {
@@ -76,7 +78,9 @@ const TournamentPage: React.FC<PageProps> = () => {
                     Delete
                   </Button>
                   <Button
-                    onClick={() => handleDelete(tournament.id)}
+                    onClick={() =>
+                      router.push(`/dashboard/tournament/${tournament.id}`)
+                    }
                     className="w-full"
                     variant="secondary"
                   >
