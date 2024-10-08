@@ -5,7 +5,7 @@ import React from "react";
 interface layoutProps {
   children: React.ReactNode;
   params: {
-    tournamentId: string;
+    tournamentId: number;
   };
 }
 
@@ -17,7 +17,7 @@ const layout: React.FC<layoutProps> = async ({ children, params }) => {
     queryKey: ["tournament", tournament],
     queryFn: async () => {
       const { data } = await rpc.api.tournament.id.get({
-        tournamentId: tournament as unknown as number,
+        tournamentId: tournament,
       });
 
       console.log("fetched data", data);
