@@ -16,8 +16,20 @@ interface PageProps {}
 
 const TournamentPage: React.FC<PageProps> = () => {
   const { tournamentQuery } = TournamentHook();
+  const { tournamentDeleteMutation } = TournamentHook();
   const tournaments = tournamentQuery.data || [];
 
+  const handleDelete = async (id: number) => {
+    console.log("Deleting tournament with id:", id);
+    try {
+      await tournamentDeleteMutation.mutateAsync({
+        tournamentId: id,
+      });
+      tournamentQuery.refetch();
+    } catch (error) {
+      console.error("Failed to delete tournament:", error);
+    }
+  };
   return (
     <div className="mx-auto py-8">
       <h1 className="mb-8 text-center text-3xl font-bold">All Tournaments</h1>
@@ -48,7 +60,11 @@ const TournamentPage: React.FC<PageProps> = () => {
                   Hosted by {tournament.hosted_by}
                 </div>
                 <div className="flex">
-                  <Button className="w-full" variant="destructive">
+                  <Button
+                    onClick={() => handleDelete(tournament.id)}
+                    className="w-full"
+                    variant="destructive"
+                  >
                     Delete
                   </Button>
                 </div>

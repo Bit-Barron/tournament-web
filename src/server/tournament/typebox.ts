@@ -7,7 +7,7 @@ export enum GAMETYPE {
 }
 
 export const tournamentSchema = t.Object({
-  tournamentId: t.String({ minLength: 1, maxLength: 128 }),
+  tournamentId: t.Number({ minLength: 1, maxLength: 128 }),
 });
 
 export const tournamentCreateSchema = t.Object({

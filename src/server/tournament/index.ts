@@ -53,9 +53,9 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
     { body: tournamentCreateSchema },
   )
   .delete(
-    "/:id",
+    "/delete",
     async (ctx) => {
-      const { tournamentId } = ctx.params;
+      const { tournamentId } = ctx.body;
       const tournament = await prisma.tournament.delete({
         where: {
           id: Number(tournamentId),
@@ -64,5 +64,5 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
 
       return tournament;
     },
-    { params: tournamentSchema },
+    { body: tournamentSchema },
   );
