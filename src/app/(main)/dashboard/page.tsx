@@ -51,14 +51,14 @@ export default function MainPage() {
           />
           <MyCard
             cardTitle="Upcoming Matches"
-            cardStat={11}
+            cardStat={tournamentData.length || 0}
             lastMonth={"no change from last month"}
             CardIcon={FaCalendarAlt}
           />
           <MyCard
             cardTitle="Prize Pool"
-            cardStat={10}
-            lastMonth={"+20.1% from last month"}
+            cardStat={`${process.env.NEXT_PUBLIC_PRICE_POOL}€`}
+            lastMonth={""}
             CardIcon={FaDollarSign}
           />
         </div>

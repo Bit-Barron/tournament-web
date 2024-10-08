@@ -9,7 +9,7 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import { CalendarDays, MapPin, Users } from "lucide-react";
+import { CalendarDays, MapPin, Users, Trash2Icon } from "lucide-react";
 import React from "react";
 import { toast } from "sonner";
 
@@ -66,13 +66,21 @@ const TournamentPage: React.FC<PageProps> = () => {
                 <div className="font-medium">
                   Hosted by {tournament.hosted_by}
                 </div>
-                <div className="flex">
+                <div className="flex space-x-3">
                   <Button
                     onClick={() => handleDelete(tournament.id)}
                     className="w-full"
                     variant="destructive"
                   >
+                    <Trash2Icon className="h-6" />
                     Delete
+                  </Button>
+                  <Button
+                    onClick={() => handleDelete(tournament.id)}
+                    className="w-full"
+                    variant="secondary"
+                  >
+                    Manage Tournament
                   </Button>
                 </div>
               </div>

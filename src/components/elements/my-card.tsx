@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 interface MyCardProps {
   cardTitle: string;
-  cardStat: number;
+  cardStat: number | string;
   lastMonth: string;
   CardIcon: IconType;
 }
