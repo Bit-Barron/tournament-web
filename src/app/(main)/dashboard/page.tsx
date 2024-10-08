@@ -3,15 +3,14 @@
 import { MyCard } from "@/components/elements/my-card";
 import { TournamentHook } from "@/components/hooks/tournament-hook";
 import { UserHook } from "@/components/hooks/user-hook";
-import { CreateTournament } from "@/components/pages/dashboard/create-tournament";
-import { OngoingTournaments } from "@/components/pages/dashboard/ongoing";
-import { RecentResults } from "@/components/pages/dashboard/recent-results";
-import { UpcomingMatches } from "@/components/pages/dashboard/upcoming-matches";
+import { CreateTournament } from "@/components/pages/dashboard/create-tourney";
+import { OngoingTournaments } from "@/components/pages/dashboard/card/active-tourneys";
+import { RecentResults } from "@/components/pages/dashboard/card/result-card";
+import { UpcomingMatches } from "@/components/pages/dashboard/card/match-list";
 import {
   recentResults,
   upcomingMatches,
 } from "@/components/pages/dashboard/utils/constants";
-import { Button } from "@/components/ui/button";
 import { FaCalendarAlt, FaDollarSign, FaTrophy, FaUsers } from "react-icons/fa";
 
 interface MainPageProps {}

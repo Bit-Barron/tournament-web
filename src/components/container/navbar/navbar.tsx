@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
 import { DashboardStore } from "@/store/dashboard/DashboardStore";
 import { useSnapshot } from "valtio";
 import { FaTrophy } from "react-icons/fa";
 import { CiMenuBurger, CiSearch, CiBellOn } from "react-icons/ci";
-import { UserHook } from "../hooks/user-hook";
-import { ThemeToggle } from "../utils/theme-switch";
 import { useRouter } from "next/navigation";
+import { UserHook } from "@/components/hooks/user-hook";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ThemeToggle } from "@/components/utils/theme-switch";
 
 export const Navbar = () => {
   const dashboardStore = useSnapshot(DashboardStore);
