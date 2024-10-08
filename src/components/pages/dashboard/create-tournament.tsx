@@ -16,11 +16,11 @@ import { GAMETYPE } from "@/server/tournament/typebox";
 import { toast } from "sonner";
 
 interface CreateTournamentProps {
-  variant?: ButtonProps["variant"];
+  variant?: any;
 }
 
 export const CreateTournament: React.FC<CreateTournamentProps> = ({
-  variant = "default",
+  variant,
 }) => {
   const tournamentStore = useSnapshot(TournamentStore);
   const { tournamentMutation } = TournamentHook();
