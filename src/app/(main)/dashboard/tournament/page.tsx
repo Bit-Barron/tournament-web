@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { CalendarDays, MapPin, Users } from "lucide-react";
 import React from "react";
+import { toast } from "sonner";
 
 interface PageProps {}
 
@@ -20,19 +21,24 @@ const TournamentPage: React.FC<PageProps> = () => {
   const tournaments = tournamentQuery.data || [];
 
   const handleDelete = async (id: number) => {
-    console.log("Deleting tournament with id:", id);
     try {
       await tournamentDeleteMutation.mutateAsync({
         tournamentId: id,
       });
-      tournamentQuery.refetch();
+      toast.success("Tournament deleted successfully");
     } catch (error) {
+      toast.error("Failed to delete tournament");
       console.error("Failed to delete tournament:", error);
     }
   };
   return (
     <div className="mx-auto py-8">
       <h1 className="mb-8 text-center text-3xl font-bold">All Tournaments</h1>
+      {tournaments.length === 0 && (
+        <div className="flex h-32 items-center justify-center">
+          No tournaments found
+        </div>
+      )}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {tournaments.map((tournament) => (
           <Card key={tournament.id}>
