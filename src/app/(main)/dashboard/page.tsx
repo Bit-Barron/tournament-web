@@ -13,8 +13,6 @@ import {
 } from "@/components/pages/dashboard/utils/constants";
 import { FaCalendarAlt, FaDollarSign, FaTrophy, FaUsers } from "react-icons/fa";
 
-interface MainPageProps {}
-
 export default function MainPage() {
   const { meQuery } = UserHook();
   const { tournamentQuery, tournamentUserQuery } = TournamentHook();

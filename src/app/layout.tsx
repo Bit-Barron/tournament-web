@@ -1,8 +1,13 @@
 import QueryProvider from "@/components/providers/query-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import "./globals.css";
 import { Toaster } from "sonner";
+import dynamic from "next/dynamic";
+
+const ScrollArea = dynamic(
+  () => import("@/components/ui/scroll-area").then((mod) => mod.ScrollArea),
+  { ssr: false },
+);
 
 export default function RootLayout({
   children,
