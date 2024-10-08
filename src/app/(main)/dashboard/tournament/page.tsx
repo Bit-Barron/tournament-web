@@ -1,6 +1,7 @@
 "use client";
 
 import { TournamentHook } from "@/components/hooks/tournament-hook";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardHeader,
@@ -42,6 +43,14 @@ const TournamentPage: React.FC<PageProps> = () => {
                 <div className="flex items-center">
                   <Users className="mr-2 h-4 w-4" />
                   <span>{tournament.max_participants} participants</span>
+                </div>
+                <div className="font-medium">
+                  Hosted by {tournament.hosted_by}
+                </div>
+                <div className="flex">
+                  <Button className="w-full" variant="destructive">
+                    Delete
+                  </Button>
                 </div>
               </div>
             </CardContent>
