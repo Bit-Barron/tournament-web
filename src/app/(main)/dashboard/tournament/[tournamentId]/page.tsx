@@ -112,6 +112,7 @@ const Page = () => {
                             await participantDeleteMutation.mutateAsync({
                               discordId: participant.discord_id,
                             });
+                            tournamentIdQuery.refetch();
                           } catch (error) {
                             console.error("Error deleting participant:", error);
                           }
