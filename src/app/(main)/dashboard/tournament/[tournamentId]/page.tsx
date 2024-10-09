@@ -2,9 +2,17 @@
 
 import React from "react";
 import { TournamentHook } from "@/components/hooks/tournament-hook";
-import { Table, TableHeader, TableRow, TableHead } from "@/components/ui/table";
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from "@/components/ui/table";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { getStatusStyle } from "@/components/utils/constants";
+import { Button } from "@/components/ui/button";
 
 const Page = () => {
   const { tournamentIdQuery, participantsQuery } = TournamentHook();
@@ -90,7 +98,20 @@ const Page = () => {
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
-            <tbody></tbody>
+            <TableBody>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="border-gray-600 text-gray-300 hover:bg-gray-800"
+                  >
+                    View Profile
+                  </Button>
+                </TableCell>
+              </TableRow>
+            </TableBody>
           </Table>
         </CardContent>
       </Card>
