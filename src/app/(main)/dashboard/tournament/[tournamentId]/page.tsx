@@ -2,31 +2,29 @@
 
 import React from "react";
 import { TournamentHook } from "@/components/hooks/tournament-hook";
-import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableHeader,
-  TableRow,
-  TableHead,
-  TableBody,
-  TableCell,
-} from "@/components/ui/table";
+import { Table, TableHeader, TableRow, TableHead } from "@/components/ui/table";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { getStatusStyle } from "@/components/utils/constants";
-import { TournamentData } from "@/types/tournament";
 
 const Page = () => {
-  const { tournamentIdQuery } = TournamentHook();
-  const data = tournamentIdQuery.data as TournamentData;
+  const { tournamentIdQuery, participantsQuery } = TournamentHook();
+  const tournament = tournamentIdQuery.data;
+  const participants = participantsQuery.data || [];
 
-  if (!data) {
-    return <div className="py-8 text-center">Loading...</div>;
+  console.log(participants);
+
+  if (!tournament) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        No tournament data available.
+      </div>
+    );
   }
 
   return (
     <main className="container mx-auto px-4 py-8">
       <h1 className="mb-6 text-center text-3xl font-bold">
-        {data.tournament_name}
+        {tournament?.tournament_name}
       </h1>
 
       <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -36,17 +34,17 @@ const Page = () => {
           </CardHeader>
           <CardContent>
             <p>
-              <strong>ID:</strong> {data.id}
+              <strong>ID:</strong> {tournament?.id}
             </p>
             <p>
               <strong>Start Date:</strong>{" "}
-              {new Date(data.start_date).toLocaleDateString()}
+              {new Date(tournament?.start_date).toLocaleDateString()}
             </p>
             <p>
-              <strong>Game Type:</strong> {data.game_type}
+              <strong>Game Type:</strong> {tournament.game_type}
             </p>
             <p>
-              <strong>Hosted By:</strong> {data.hosted_by}
+              <strong>Hosted By:</strong> {tournament.hosted_by}
             </p>
           </CardContent>
         </Card>
@@ -57,9 +55,9 @@ const Page = () => {
           </CardHeader>
           <CardContent>
             <span
-              className={`rounded-full px-3 py-1 text-sm font-medium ${getStatusStyle(data.status)}`}
+              className={`rounded-full px-3 py-1 text-sm font-medium ${getStatusStyle(tournament.status)}`}
             >
-              {data.status}
+              {tournament.status}
             </span>
           </CardContent>
         </Card>
@@ -70,10 +68,11 @@ const Page = () => {
           </CardHeader>
           <CardContent>
             <p>
-              <strong>Max Participants:</strong> {data.max_participants}
+              <strong>Max Participants:</strong> {tournament.max_participants}
             </p>
             <p>
-              <strong>Current Participants:</strong> {data.max_participants}
+              <strong>Current Participants:</strong>{" "}
+              {tournament.max_participants}
             </p>
           </CardContent>
         </Card>
@@ -91,6 +90,7 @@ const Page = () => {
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
+            <tbody></tbody>
           </Table>
         </CardContent>
       </Card>

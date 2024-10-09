@@ -1,5 +1,6 @@
 import getQueryClient from "@/lib/react-query";
 import { rpc } from "@/lib/rpc";
+import { handleEden } from "@/utils/base";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import React from "react";
 
@@ -16,8 +17,19 @@ const layout: React.FC<layoutProps> = async ({ children, params }) => {
   await queryClient.prefetchQuery({
     queryKey: ["tournament", params.tournamentId],
     queryFn: async () => {
-      const { data } =
-        await rpc.api.tournament[params.tournamentId as string].get();
+      const data = handleEden(
+        await rpc.api.tournament[params.tournamentId].get(),
+      );
+      return data;
+    },
+  });
+
+  await queryClient.prefetchQuery({
+    queryKey: ["tournament", params.tournamentId, "participants"],
+    queryFn: async () => {
+      const data = handleEden(
+        await rpc.api.tournament[params.tournamentId].participants.get(),
+      );
       return data;
     },
   });

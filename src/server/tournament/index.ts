@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import Elysia from "elysia";
+import Elysia, { InternalServerError } from "elysia";
 import { tournamentCreateSchema, tournamentSchema } from "./typebox";
 
 export const tournamentRoute = new Elysia({ prefix: "/tournament" })
@@ -12,32 +12,28 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
     const tournament = await prisma.user.findMany();
     return tournament;
   })
-  .get(
-    "/:tournamentId",
-    async (ctx) => {
-      const { tournamentId } = ctx.params;
+  .get("/:tournamentId", async (ctx) => {
+    const { tournamentId } = ctx.params;
 
-      try {
-        const tournament = await prisma.tournament.findUnique({
-          where: {
-            id: Number(tournamentId),
-          },
-        });
+    try {
+      const tournament = await prisma.tournament.findUnique({
+        where: {
+          id: Number(tournamentId),
+        },
+      });
 
-        if (!tournament) {
-          return { success: false, message: "Tournament not found" };
-        }
+      console.log("tournamentasd", tournament);
 
-        return tournament;
-      } catch (err) {
-        console.error(err);
-        return { success: false, message: "Internal server error" };
+      if (!tournament) {
+        throw new InternalServerError("Tournament not found");
       }
-    },
-    {
-      params: tournamentSchema,
-    },
-  )
+
+      return tournament;
+    } catch (err) {
+      console.error(err);
+      throw new InternalServerError(err as string);
+    }
+  })
   .post(
     "",
     async (ctx) => {
@@ -75,4 +71,27 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
       return tournament;
     },
     { body: tournamentSchema },
-  );
+  )
+  .get("/:tournamentId/participants", async (ctx) => {
+    const { tournamentId } = ctx.params;
+
+    try {
+      const tournament = await prisma.tournament.findUnique({
+        where: {
+          id: Number(tournamentId),
+        },
+        include: {
+          participants: true,
+        },
+      });
+
+      if (!tournament) {
+        throw new InternalServerError("Tournament not found");
+      }
+
+      return tournament;
+    } catch (err) {
+      console.error(err);
+      throw new InternalServerError(err as string);
+    }
+  });

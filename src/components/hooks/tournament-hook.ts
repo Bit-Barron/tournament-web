@@ -26,6 +26,18 @@ export const TournamentHook = () => {
     },
   });
 
+  const participantsQuery = useQuery({
+    queryKey: ["tournament", params.tournamentId, "participants"],
+    enabled: !!params.tournamentId,
+    queryFn: async () => {
+      return handleEden(
+        await rpc.api.tournament[
+          params.tournamentId as string
+        ].participants.get(),
+      );
+    },
+  });
+
   const tournamentMutation = useMutation({
     mutationFn: async (...args: Parameters<typeof rpc.api.tournament.post>) =>
       handleEden(await rpc.api.tournament.post(...args)),
@@ -38,6 +50,7 @@ export const TournamentHook = () => {
 
   return {
     tournamentDeleteMutation,
+    participantsQuery,
     tournamentQuery,
     tournamentUserQuery,
     tournamentIdQuery,
