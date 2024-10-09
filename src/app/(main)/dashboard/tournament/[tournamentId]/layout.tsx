@@ -13,17 +13,6 @@ const layout: React.FC<layoutProps> = async ({ children, params }) => {
   const queryClient = getQueryClient();
   const tournament = params.tournamentId;
 
-  await queryClient.prefetchQuery({
-    queryKey: ["tournament", tournament],
-    queryFn: async () => {
-      const { data } = await rpc.api.tournament.id.post({
-        tournamentId: tournament,
-      });
-
-      return data;
-    },
-  });
-
   return <section>{children}</section>;
 };
 

@@ -6,7 +6,9 @@ import React from "react";
 interface pageProps {}
 
 const page: React.FC<pageProps> = ({}) => {
-  const { tournamentMutation } = TournamentHook();
+  const { tournamentIdQuery } = TournamentHook();
+
+  console.log("tournamentIdQuery", tournamentIdQuery.data?.data);
 
   return (
     <div>

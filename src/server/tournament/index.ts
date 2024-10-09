@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import Elysia from "elysia";
 import { tournamentCreateSchema, tournamentSchema } from "./typebox";
+import { TURBO_TRACE_DEFAULT_MEMORY_LIMIT } from "next/dist/shared/lib/constants";
 
 export const tournamentRoute = new Elysia({ prefix: "/tournament" })
   .get("", async () => {
@@ -12,21 +13,28 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
     const tournament = await prisma.user.findMany();
     return tournament;
   })
-  .post(
-    "/id",
+  .get(
+    "/:tournamentId",
     async (ctx) => {
-      const { tournamentId } = ctx.body;
-      console.log("tournamentID", tournamentId);
-      const tournament = await prisma.tournament.findUnique({
-        where: {
-          id: Number(tournamentId),
-        },
-      });
+      const { tournamentId } = ctx.params;
 
-      return tournament;
+      try {
+        const tournament = await prisma.tournament.findUnique({
+          where: {
+            id: Number(tournamentId),
+          },
+        });
+        if (!tournament) {
+          throw new Error("Tournament not found");
+        }
+
+        return { success: true, data: tournament };
+      } catch (err) {
+        console.error(err);
+      }
     },
     {
-      body: tournamentSchema,
+      params: tournamentSchema,
     },
   )
   .post(

@@ -16,10 +16,13 @@ export const TournamentHook = () => {
     queryFn: async () => handleEden(await rpc.api.tournament.user.get()),
   });
 
-  const tournamentIdQuery = useMutation({
-    mutationFn: async (
-      ...args: Parameters<typeof rpc.api.tournament.id.post>
-    ) => handleEden(await rpc.api.tournament.id.post(...args)),
+  const tournamentIdQuery = useQuery({
+    queryKey: ["order", params.tournamentId],
+    enabled: true,
+    queryFn: async () => {
+      if (typeof params.orderId !== "string") throw new Error("Error");
+      return handleEden(await rpc.api.tournament[params.tournamentId as string].get());
+    },
   });
 
   const tournamentMutation = useMutation({
