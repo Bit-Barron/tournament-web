@@ -28,10 +28,6 @@ const Page = () => {
     );
   }
 
-  const handleDeleteParticipant = async (discordId: string) => {
-    await participantDeleteMutation.mutateAsync({ discordId: discordId });
-  };
-
   return (
     <main className="container mx-auto px-4 py-8">
       <h1 className="mb-6 text-center text-3xl font-bold">
