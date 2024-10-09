@@ -79,7 +79,11 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
           id: Number(tournamentId),
         },
         include: {
-          participants: true,
+          participations: {
+            include: {
+              user: true,
+            },
+          },
         },
       });
 
@@ -87,7 +91,43 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
         throw new InternalServerError("Tournament not found");
       }
 
-      return { participants: tournament.participants };
+      const participants = tournament.participations.map(
+        (participation) => participation.user,
+      );
+
+      return { participants };
+    } catch (err) {
+      console.error(err);
+      throw new InternalServerError(err as string);
+    }
+  })
+  .delete("/:tournamentId", async (ctx) => {
+    const { tournamentId } = ctx.params;
+
+    try {
+      const tournament = await prisma.tournament.findUnique({
+        where: {
+          id: Number(tournamentId),
+        },
+      });
+
+      if (!tournament) {
+        throw new InternalServerError("Tournament not found");
+      }
+
+      await prisma.participation.deleteMany({
+        where: {
+          tournamentId: Number(tournamentId),
+        },
+      });
+
+      await prisma.tournament.delete({
+        where: {
+          id: Number(tournamentId),
+        },
+      });
+
+      return "success";
     } catch (err) {
       console.error(err);
       throw new InternalServerError(err as string);
