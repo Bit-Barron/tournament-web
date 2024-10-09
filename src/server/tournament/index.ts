@@ -1,6 +1,10 @@
 import prisma from "@/lib/prisma";
 import Elysia, { InternalServerError } from "elysia";
-import { tournamentCreateSchema, tournamentSchema } from "./typebox";
+import {
+  participantSchema,
+  tournamentCreateSchema,
+  tournamentSchema,
+} from "./typebox";
 
 export const tournamentRoute = new Elysia({ prefix: "/tournament" })
   .get("", async () => {
@@ -101,35 +105,34 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
       throw new InternalServerError(err as string);
     }
   })
-  .delete("/:tournamentId", async (ctx) => {
-    const { tournamentId } = ctx.params;
+  .delete(
+    "/user",
+    async (ctx) => {
+      const { discordId } = ctx.body;
 
-    try {
-      const tournament = await prisma.tournament.findUnique({
-        where: {
-          id: Number(tournamentId),
-        },
-      });
+      try {
+        const user = await prisma.user.findUnique({
+          where: { discord_id: discordId },
+          include: { participations: true },
+        });
 
-      if (!tournament) {
-        throw new InternalServerError("Tournament not found");
+        if (!user) {
+          throw new InternalServerError("User not found");
+        }
+
+        await prisma.participation.deleteMany({
+          where: { userId: user.id },
+        });
+
+        await prisma.user.delete({
+          where: { discord_id: discordId },
+        });
+
+        throw new InternalServerError("User deleted");
+      } catch (err) {
+        console.error(err);
+        throw new InternalServerError(err as string);
       }
-
-      await prisma.participation.deleteMany({
-        where: {
-          tournamentId: Number(tournamentId),
-        },
-      });
-
-      await prisma.tournament.delete({
-        where: {
-          id: Number(tournamentId),
-        },
-      });
-
-      return "success";
-    } catch (err) {
-      console.error(err);
-      throw new InternalServerError(err as string);
-    }
-  });
+    },
+    { body: participantSchema },
+  );

@@ -10,6 +10,10 @@ export const tournamentSchema = t.Object({
   tournamentId: t.Number({ minLength: 1, maxLength: 128 }),
 });
 
+export const participantSchema = t.Object({
+  discordId: t.String({ minLength: 1, maxLength: 128 }),
+});
+
 export const tournamentCreateSchema = t.Object({
   tournament_name: t.String({ minLength: 1, maxLength: 128 }),
   game_type: t.Enum(GAMETYPE),

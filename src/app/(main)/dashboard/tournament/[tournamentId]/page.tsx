@@ -18,6 +18,7 @@ const Page = () => {
   const { tournamentIdQuery, participantsQuery } = TournamentHook();
   const tournament = tournamentIdQuery.data;
   const participants = participantsQuery.data || [];
+  const { participantDeleteMutation } = TournamentHook();
 
   if (!tournament) {
     return (
@@ -26,6 +27,10 @@ const Page = () => {
       </div>
     );
   }
+
+  const handleDeleteParticipant = async (discordId: string) => {
+    await participantDeleteMutation.mutateAsync({ discordId: discordId });
+  };
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -104,7 +109,22 @@ const Page = () => {
                   <TableCell>{participant.brawlstars_id}</TableCell>
                   <TableCell>{participant.discord_id}</TableCell>
                   <TableCell>
-                    <Button variant="destructive" size="sm">
+                    <Button
+                      onClick={() => {
+                        const deleteUser = async () => {
+                          try {
+                            await participantDeleteMutation.mutateAsync({
+                              discordId: participant.discord_id,
+                            });
+                          } catch (error) {
+                            console.error("Error deleting participant:", error);
+                          }
+                        };
+                        deleteUser();
+                      }}
+                      variant="destructive"
+                      size="sm"
+                    >
                       Delete
                     </Button>
                   </TableCell>

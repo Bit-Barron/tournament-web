@@ -49,8 +49,15 @@ export const TournamentHook = () => {
       handleEden(await rpc.api.tournament.delete(...args)),
   });
 
+  const participantDeleteMutation = useMutation({
+    mutationFn: async (
+      ...args: Parameters<typeof rpc.api.tournament.user.delete>
+    ) => handleEden(await rpc.api.tournament.user.delete(...args)),
+  });
+
   return {
     tournamentDeleteMutation,
+    participantDeleteMutation,
     participantsQuery,
     tournamentQuery,
     tournamentUserQuery,
