@@ -128,7 +128,7 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
           where: { discord_id: discordId },
         });
 
-        throw new InternalServerError("User deleted");
+        return { message: "User deleted successfully" };
       } catch (err) {
         console.error(err);
         throw new InternalServerError(err as string);

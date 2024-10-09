@@ -13,12 +13,26 @@ import {
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { getStatusStyle } from "@/components/utils/constants";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const Page = () => {
   const { tournamentIdQuery, participantsQuery } = TournamentHook();
   const tournament = tournamentIdQuery.data;
   const participants = participantsQuery.data || [];
   const { participantDeleteMutation } = TournamentHook();
+
+  const deleteUser = async (discord_id: string) => {
+    try {
+      await participantDeleteMutation.mutateAsync({
+        discordId: discord_id,
+      });
+      participantsQuery.refetch();
+      toast.success(`Participant ${discord_id} deleted successfully`);
+    } catch (error) {
+      toast.error("Error deleting participant");
+      console.error("Error deleting participant:", error);
+    }
+  };
 
   if (!tournament) {
     return (
@@ -99,7 +113,7 @@ const Page = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {participants.map((participant, index) => (
+              {participants?.map((participant, index) => (
                 <TableRow key={index}>
                   <TableCell>{participant.username}</TableCell>
                   <TableCell>{participant.brawlstars_id}</TableCell>
@@ -107,17 +121,7 @@ const Page = () => {
                   <TableCell>
                     <Button
                       onClick={() => {
-                        const deleteUser = async () => {
-                          try {
-                            await participantDeleteMutation.mutateAsync({
-                              discordId: participant.discord_id,
-                            });
-                            tournamentIdQuery.refetch();
-                          } catch (error) {
-                            console.error("Error deleting participant:", error);
-                          }
-                        };
-                        deleteUser();
+                        deleteUser(participant.discord_id);
                       }}
                       variant="destructive"
                       size="sm"
