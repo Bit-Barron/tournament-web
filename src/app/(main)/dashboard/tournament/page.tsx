@@ -14,12 +14,8 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "sonner";
 
-interface PageProps {}
-
-const TournamentPage: React.FC<PageProps> = () => {
-  const { tournamentQuery } = TournamentHook();
-  const { tournamentDeleteMutation } = TournamentHook();
-  const tournaments = tournamentQuery.data || [];
+const TournamentPage: React.FC = () => {
+  const { tournamentQuery, tournamentDeleteMutation } = TournamentHook();
   const router = useRouter();
 
   const handleDelete = async (id: number) => {
@@ -28,12 +24,18 @@ const TournamentPage: React.FC<PageProps> = () => {
         tournamentId: id,
       });
       toast.success("Tournament deleted successfully");
-      tournamentQuery.refetch();
     } catch (error) {
       toast.error("Failed to delete tournament");
       console.error("Failed to delete tournament:", error);
     }
   };
+
+  const handleManage = (tournamentId: number) => {
+    router.push(`/dashboard/tournament/${tournamentId}`);
+  };
+
+  const tournaments = tournamentQuery.data || [];
+
   return (
     <div className="mx-auto py-8">
       <h1 className="mb-8 text-center text-3xl font-bold">All Tournaments</h1>
@@ -55,7 +57,9 @@ const TournamentPage: React.FC<PageProps> = () => {
               <div className="flex flex-col space-y-2">
                 <div className="flex items-center">
                   <CalendarDays className="mr-2 h-4 w-4" />
-                  <span>{tournament.start_date as any}</span>
+                  <span>
+                    {new Date(tournament.start_date).toLocaleDateString()}
+                  </span>
                 </div>
                 <div className="flex items-center">
                   <MapPin className="mr-2 h-4 w-4" />
@@ -77,16 +81,14 @@ const TournamentPage: React.FC<PageProps> = () => {
                     <Trash2Icon className="h-6" />
                     Delete
                   </Button>
-                  <Button
-                    onClick={() =>
-                      router.push(`/dashboard/tournament/${tournament.id}`)
-                    }
-                    className="w-full"
-                    variant="secondary"
-                  >
-                    Manage Tournament
-                  </Button>
                 </div>
+                <Button
+                  onClick={() => handleManage(tournament.id)}
+                  className="w-full"
+                  variant="secondary"
+                >
+                  Manage Tournament
+                </Button>
               </div>
             </CardContent>
           </Card>

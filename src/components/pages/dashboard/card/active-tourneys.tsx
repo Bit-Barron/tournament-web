@@ -1,13 +1,14 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { GAMETYPE } from "@/server/tournament/typebox";
 import { useRouter } from "next/navigation";
 
 interface Tournament {
   id: number;
   tournament_name: string;
   start_date: Date;
-  game_type: any;
-  status: any;
+  game_type: GAMETYPE;
+  status: string;
   max_participants: number;
   hosted_by: string;
 }

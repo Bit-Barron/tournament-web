@@ -12,7 +12,6 @@ interface layoutProps {
 }
 
 const layout: React.FC<layoutProps> = async ({ children, params }) => {
-  console.log(params);
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery({
@@ -24,7 +23,6 @@ const layout: React.FC<layoutProps> = async ({ children, params }) => {
     queryKey: ["tournament"],
     queryFn: async () => {
       const { data } = await rpc.api.tournament.user.get();
-
       return data;
     },
   });
