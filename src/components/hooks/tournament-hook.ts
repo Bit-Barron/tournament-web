@@ -27,14 +27,15 @@ export const TournamentHook = () => {
   });
 
   const participantsQuery = useQuery({
-    queryKey: ["tournament", params.tournamentId],
+    queryKey: ["tournament", params.tournamentId, "participants"],
     enabled: !!params.tournamentId,
     queryFn: async () => {
-      return handleEden(
+      const data = await handleEden(
         await rpc.api.tournament[
-          params.tournamentId
+          params.tournamentId as string
         ].participants.get(),
       );
+      return data.participants;
     },
   });
 

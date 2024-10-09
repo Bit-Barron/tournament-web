@@ -19,8 +19,6 @@ const Page = () => {
   const tournament = tournamentIdQuery.data;
   const participants = participantsQuery.data || [];
 
-  console.log(participants);
-
   if (!tournament) {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -79,8 +77,7 @@ const Page = () => {
               <strong>Max Participants:</strong> {tournament.max_participants}
             </p>
             <p>
-              <strong>Current Participants:</strong>{" "}
-              {tournament.max_participants}
+              <strong>Current Participants:</strong> {participants.length}
             </p>
           </CardContent>
         </Card>
@@ -94,23 +91,25 @@ const Page = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Participant Name</TableHead>
+                <TableHead>Username</TableHead>
+                <TableHead>Brawl Stars ID</TableHead>
+                <TableHead>Discord ID</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="border-gray-600 text-gray-300 hover:bg-gray-800"
-                  >
-                    View Profile
-                  </Button>
-                </TableCell>
-              </TableRow>
+              {participants.map((participant, index) => (
+                <TableRow key={index}>
+                  <TableCell>{participant.username}</TableCell>
+                  <TableCell>{participant.brawlstars_id}</TableCell>
+                  <TableCell>{participant.discord_id}</TableCell>
+                  <TableCell>
+                    <Button variant="destructive" size="sm">
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </CardContent>

@@ -1,5 +1,5 @@
 export function getStatusStyle(status: string): string {
-  switch (status.toUpperCase()) {
+  switch (status?.toUpperCase()) {
     case "PENDING":
       return "bg-yellow-500 text-yellow-900";
     case "ACTIVE":

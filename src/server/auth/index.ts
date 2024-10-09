@@ -67,6 +67,6 @@ export const authRoute = new Elysia({ prefix: "/auth" })
       path: "/",
       httpOnly: true,
       maxAge: 0,
-    });
+    })
     return "success";
   });

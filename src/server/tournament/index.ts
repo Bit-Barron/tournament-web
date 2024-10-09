@@ -22,8 +22,6 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
         },
       });
 
-      console.log("tournamentasd", tournament);
-
       if (!tournament) {
         throw new InternalServerError("Tournament not found");
       }
@@ -89,7 +87,7 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
         throw new InternalServerError("Tournament not found");
       }
 
-      return tournament;
+      return { participants: tournament.participants };
     } catch (err) {
       console.error(err);
       throw new InternalServerError(err as string);
