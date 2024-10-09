@@ -1,7 +1,6 @@
 import prisma from "@/lib/prisma";
 import Elysia from "elysia";
 import { tournamentCreateSchema, tournamentSchema } from "./typebox";
-import { TURBO_TRACE_DEFAULT_MEMORY_LIMIT } from "next/dist/shared/lib/constants";
 
 export const tournamentRoute = new Elysia({ prefix: "/tournament" })
   .get("", async () => {

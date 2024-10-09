@@ -20,7 +20,7 @@ export const TournamentHook = () => {
     queryKey: ["tournament", params.tournamentId],
     queryFn: async () => {
       return handleEden(
-        await rpc.api.tournament[params.tournamentId as string].get(),
+        await rpc.api.tournament[params.tournamentId as any].get(),
       );
     },
   });
