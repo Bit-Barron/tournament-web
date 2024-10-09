@@ -6,14 +6,17 @@ import React from "react";
 
 interface layoutProps {
   children: React.ReactNode;
+  params: {
+    tournamentId: string;
+  };
 }
 
-const layout: React.FC<layoutProps> = async ({ children }) => {
+const layout: React.FC<layoutProps> = async ({ children, params }) => {
+  console.log(params);
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ["tournaments"],
-
+    queryKey: ["tournament"],
     queryFn: async () => handleEden(await rpc.api.tournament.get()),
   });
 

@@ -1,19 +1,24 @@
 "use client";
 
 import { TournamentHook } from "@/components/hooks/tournament-hook";
+
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface pageProps {}
 
-const page: React.FC<pageProps> = ({}) => {
+const Page: React.FC<pageProps> = ({}) => {
   const { tournamentIdQuery } = TournamentHook();
+  const tournament = tournamentIdQuery.data;
+  const router = useRouter();
 
-  console.log("tournamentIdQuery", tournamentIdQuery.data?.data);
+  if (!tournament) router.push("/dashboard/tournament");
 
+  console.log(tournament);
   return (
     <div>
-      <div>Tournaments</div>
+      <h1>barron</h1>
     </div>
   );
 };
-export default page;
+export default Page;

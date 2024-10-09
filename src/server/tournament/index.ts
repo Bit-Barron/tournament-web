@@ -24,13 +24,15 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
             id: Number(tournamentId),
           },
         });
+
         if (!tournament) {
-          throw new Error("Tournament not found");
+          return { success: false, message: "Tournament not found" };
         }
 
-        return { success: true, data: tournament };
+        return tournament;
       } catch (err) {
         console.error(err);
+        return { success: false, message: "Internal server error" };
       }
     },
     {
