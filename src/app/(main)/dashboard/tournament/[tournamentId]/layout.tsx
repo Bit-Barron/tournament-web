@@ -1,6 +1,6 @@
 import getQueryClient from "@/lib/react-query";
 import { rpc } from "@/lib/rpc";
-import { HydrationBoundary } from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import React from "react";
 
 interface layoutProps {
@@ -22,7 +22,11 @@ const layout: React.FC<layoutProps> = async ({ children, params }) => {
     },
   });
 
-  return <HydrationBoundary>{children}</HydrationBoundary>;
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      {children}
+    </HydrationBoundary>
+  );
 };
 
 export default layout;

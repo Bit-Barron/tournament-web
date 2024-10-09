@@ -6,4 +6,5 @@ export type TournamentData = {
   status: $Enums.TournamentStatus;
   max_participants: number;
   hosted_by: string;
+  participants: string[];
 };
