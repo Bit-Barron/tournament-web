@@ -49,7 +49,7 @@ export function TournamentCombobox({
       setNewTournamentName("");
     }
   };
-
+  
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>

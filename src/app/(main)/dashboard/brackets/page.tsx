@@ -14,6 +14,7 @@ const page: React.FC<pageProps> = ({}) => {
     console.log(id);
   };
 
+  
   return (
     <div>
       <TournamentCombobox
