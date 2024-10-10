@@ -8,7 +8,6 @@ export const DashboardStore = proxy({
   tabs: [
     { name: "Dashboard", href: "/dashboard/", icon: FiLayout },
     { name: "Tournaments", href: "/dashboard/tournament", icon: IoIosTrophy },
-    { name: "Participants", href: "/dashboard/participants", icon: FiUsers },
     { name: "Brackets", href: "/dashboard/brackets", icon: FiGitBranch },
   ],
 });

@@ -8,3 +8,9 @@ export type TournamentData = {
   hosted_by: string;
   participants: string[];
 };
+
+export type TournamentStatus =
+  | "PENDING"
+  | "ONGOING"
+  | "COMPLETED"
+  | "CANCELED";
