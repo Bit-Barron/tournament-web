@@ -2,37 +2,17 @@
 
 import React from "react";
 import { TournamentHook } from "@/components/hooks/tournament-hook";
-import {
-  Table,
-  TableHeader,
-  TableRow,
-  TableHead,
-  TableBody,
-  TableCell,
-} from "@/components/ui/table";
+
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { getStatusStyle } from "@/components/utils/constants";
-import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { ParticipantList } from "@/components/pages/tournament/participant-list";
+import { ParticipantBracket } from "@/components/pages/tournament/participant-bracket";
 
 const Page = () => {
   const { tournamentIdQuery, participantsQuery } = TournamentHook();
   const tournament = tournamentIdQuery.data;
   const participants = participantsQuery.data || [];
-  const { participantDeleteMutation } = TournamentHook();
-
-  const deleteUser = async (discord_id: string) => {
-    try {
-      await participantDeleteMutation.mutateAsync({
-        discordId: discord_id,
-      });
-      participantsQuery.refetch();
-      toast.success(`Participant ${discord_id} deleted successfully`);
-    } catch (error) {
-      toast.error("Error deleting participant");
-      console.error("Error deleting participant:", error);
-    }
-  };
 
   if (!tournament) {
     return (
@@ -98,43 +78,9 @@ const Page = () => {
         </Card>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Participant List</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Username</TableHead>
-                <TableHead>Brawl Stars ID</TableHead>
-                <TableHead>Discord ID</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {participants?.map((participant, index) => (
-                <TableRow key={index}>
-                  <TableCell>{participant.username}</TableCell>
-                  <TableCell>{participant.brawlstars_id}</TableCell>
-                  <TableCell>{participant.discord_id}</TableCell>
-                  <TableCell>
-                    <Button
-                      onClick={() => {
-                        deleteUser(participant.discord_id);
-                      }}
-                      variant="destructive"
-                      size="sm"
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+      <ParticipantList />
+
+      <ParticipantBracket />
     </main>
   );
 };
