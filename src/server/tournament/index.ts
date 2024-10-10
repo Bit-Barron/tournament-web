@@ -4,6 +4,7 @@ import {
   participantSchema,
   tournamentCreateSchema,
   tournamentSchema,
+  tournamentWinnerSchema,
 } from "./typebox";
 
 export const tournamentRoute = new Elysia({ prefix: "/tournament" })
@@ -135,4 +136,57 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
       }
     },
     { body: participantSchema },
-  );
+  )
+  .post(
+    "/tournament-winners",
+    async (ctx) => {
+      try {
+        const { tournamentId, roundNumber, winnerId } = ctx.body;
+
+        const updatedRound = await prisma.tournamentRound.upsert({
+          where: {
+            tournamentId_roundNumber: {
+              tournamentId,
+              roundNumber,
+            },
+          },
+          update: {
+            winnerId,
+          },
+          create: {
+            tournamentId,
+            roundNumber,
+            winnerId,
+          },
+        });
+
+        return {
+          success: true,
+          data: updatedRound,
+        };
+      } catch (err) {
+        console.error(err);
+        throw new InternalServerError(err as string);
+      }
+    },
+    { body: tournamentWinnerSchema },
+  )
+  .get("/tournament-winners/:tournamentId", async (ctx) => {
+    const { tournamentId } = ctx.params;
+
+    try {
+      const tournamentWinners = await prisma.tournamentRound.findMany({
+        where: {
+          tournamentId: Number(tournamentId),
+        },
+        include: {
+          winner: true,
+        },
+      });
+
+      return tournamentWinners;
+    } catch (err) {
+      console.error(err);
+      throw new InternalServerError(err as string);
+    }
+  });

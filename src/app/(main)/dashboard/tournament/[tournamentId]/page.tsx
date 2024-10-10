@@ -5,7 +5,6 @@ import { TournamentHook } from "@/components/hooks/tournament-hook";
 
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { getStatusStyle } from "@/components/utils/constants";
-import { toast } from "sonner";
 import { ParticipantList } from "@/components/pages/tournament/participant-list";
 import { ParticipantBracket } from "@/components/pages/tournament/participant-bracket";
 

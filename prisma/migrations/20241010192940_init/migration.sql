@@ -44,6 +44,16 @@ CREATE TABLE "Participation" (
 );
 
 -- CreateTable
+CREATE TABLE "TournamentRound" (
+    "id" SERIAL NOT NULL,
+    "tournamentId" INTEGER NOT NULL,
+    "roundNumber" INTEGER NOT NULL,
+    "winnerId" INTEGER,
+
+    CONSTRAINT "TournamentRound_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Admin" (
     "id" TEXT NOT NULL,
     "username" TEXT NOT NULL,
@@ -62,6 +72,9 @@ CREATE UNIQUE INDEX "User_discord_id_key" ON "User"("discord_id");
 CREATE UNIQUE INDEX "Participation_userId_tournamentId_key" ON "Participation"("userId", "tournamentId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "TournamentRound_tournamentId_roundNumber_key" ON "TournamentRound"("tournamentId", "roundNumber");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Admin_username_key" ON "Admin"("username");
 
 -- AddForeignKey
@@ -69,3 +82,9 @@ ALTER TABLE "Participation" ADD CONSTRAINT "Participation_userId_fkey" FOREIGN K
 
 -- AddForeignKey
 ALTER TABLE "Participation" ADD CONSTRAINT "Participation_tournamentId_fkey" FOREIGN KEY ("tournamentId") REFERENCES "Tournament"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "TournamentRound" ADD CONSTRAINT "TournamentRound_tournamentId_fkey" FOREIGN KEY ("tournamentId") REFERENCES "Tournament"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "TournamentRound" ADD CONSTRAINT "TournamentRound_winnerId_fkey" FOREIGN KEY ("winnerId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;

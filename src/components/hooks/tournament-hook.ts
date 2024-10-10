@@ -55,8 +55,32 @@ export const TournamentHook = () => {
     ) => handleEden(await rpc.api.tournament.user.delete(...args)),
   });
 
+  const tournamentWinnersQuery = useQuery({
+    queryKey: ["tournament-winners", params.tournamentId],
+    enabled: !!params.tournamentId,
+    queryFn: async () => {
+      const data = handleEden(
+        await rpc.api.tournament["tournament-winners"][
+          params.tournamentId as string
+        ].get(),
+      );
+      return data;
+    },
+  });
+
+  const tournamentWinnersMutation = useMutation({
+    mutationFn: async (
+      ...args: Parameters<
+        (typeof rpc.api.tournament)["tournament-winners"]["post"]
+      >
+    ) =>
+      handleEden(await rpc.api.tournament["tournament-winners"].post(...args)),
+  });
+
   return {
     tournamentDeleteMutation,
+    tournamentWinnersMutation,
+    tournamentWinnersQuery,
     participantDeleteMutation,
     participantsQuery,
     tournamentQuery,

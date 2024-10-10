@@ -21,3 +21,9 @@ export const tournamentCreateSchema = t.Object({
   start_date: t.Date(),
   hosted_by: t.String({ minLength: 1, maxLength: 128 }),
 });
+
+export const tournamentWinnerSchema = t.Object({
+  tournamentId: t.Number({ minLength: 1, maxLength: 128 }),
+  winnerId: t.Number({ minLength: 1, maxLength: 128 }),
+  roundNumber: t.Number({ minLength: 1, maxLength: 128 }),
+});
