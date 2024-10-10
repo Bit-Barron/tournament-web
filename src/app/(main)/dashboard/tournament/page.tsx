@@ -31,10 +31,6 @@ const TournamentPage: React.FC = () => {
     }
   };
 
-  const handleManage = (tournamentId: number) => {
-    router.push(`/dashboard/tournament/${tournamentId}`);
-  };
-
   const tournaments = tournamentQuery.data || [];
 
   return (
@@ -84,7 +80,9 @@ const TournamentPage: React.FC = () => {
                   </Button>
                 </div>
                 <Button
-                  onClick={() => handleManage(tournament.id)}
+                  onClick={() =>
+                    router.push(`/dashboard/tournament/${tournament.id}`)
+                  }
                   className="w-full"
                   variant="secondary"
                 >
