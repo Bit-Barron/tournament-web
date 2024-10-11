@@ -3,10 +3,10 @@
 import { MyCard } from "@/components/elements/my-card";
 import { TournamentHook } from "@/components/hooks/tournament-hook";
 import { UserHook } from "@/components/hooks/user-hook";
-import { CreateTournament } from "@/components/pages/dashboard/create-tourney";
-import { OngoingTournaments } from "@/components/pages/dashboard/card/active-tourneys";
-import { RecentResults } from "@/components/pages/dashboard/card/result-card";
-import { UpcomingMatches } from "@/components/pages/dashboard/card/match-list";
+import { CreateTournament } from "@/components/pages/dashboard/create-tournament";
+import { OngoingTournaments } from "@/components/pages/dashboard/elements/active-tourneys";
+import { RecentResults } from "@/components/pages/dashboard/elements/result-card";
+import { UpcomingMatches } from "@/components/pages/dashboard/elements/match-list";
 import {
   recentResults,
   upcomingMatches,

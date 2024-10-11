@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import Elysia, { InternalServerError } from "elysia";
 import {
+  createUserSchema,
   participantSchema,
   sendUserSchema,
   tournamentCreateSchema,
@@ -208,4 +209,26 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
       return ENDPOINT;
     },
     { body: sendUserSchema },
+  )
+  .post(
+    "/create-user",
+    async (ctx) => {
+      const { discord_id, username, brawlstars_id, tournamentId } = ctx.body;
+
+      try {
+        const user = await prisma.user.create({
+          data: {
+            discord_id,
+            username,
+            brawlstars_id,
+          },
+        });
+
+        return user;
+      } catch (err) {
+        console.error(err);
+        throw new InternalServerError(err as string);
+      }
+    },
+    { body: createUserSchema },
   );

@@ -1,5 +1,5 @@
 import { proxy } from "valtio";
-import { FiLayout, FiGitBranch } from "react-icons/fi";
+import { FiLayout } from "react-icons/fi";
 import { IoIosTrophy } from "react-icons/io";
 
 export type DashboardStore = typeof DashboardStore;

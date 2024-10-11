@@ -83,8 +83,15 @@ export const TournamentHook = () => {
     ) => handleEden(await rpc.api.tournament["send-user"].post(...args)),
   });
 
+  const createUserMutation = useMutation({
+    mutationFn: async (
+      ...args: Parameters<(typeof rpc.api.tournament)["create-user"]["post"]>
+    ) => handleEden(await rpc.api.tournament["create-user"].post(...args)),
+  });
+
   return {
     tournamentDeleteMutation,
+    createUserMutation,
     sendUserMutation,
     tournamentWinnersMutation,
     tournamentWinnersQuery,

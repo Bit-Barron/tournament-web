@@ -34,3 +34,10 @@ export const sendUserSchema = t.Object({
   brawlstars_id: t.String({ minLength: 1, maxLength: 128 }),
   discord_id: t.String({ minLength: 1, maxLength: 128 }),
 });
+
+export const createUserSchema = t.Object({
+  username: t.String({ minLength: 1, maxLength: 128 }),
+  brawlstars_id: t.String({ minLength: 1, maxLength: 128 }),
+  discord_id: t.String({ minLength: 1, maxLength: 128 }),
+  tournamentId: t.String({ minLength: 1, maxLength: 128 }),
+});
