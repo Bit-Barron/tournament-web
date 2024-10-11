@@ -3,7 +3,7 @@
 import React from "react";
 import { TournamentHook } from "@/components/hooks/tournament-hook";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { getStatusStyle } from "@/components/utils/constants";
+import { getStatusStyle } from "@/components/utils/helper";
 import { ParticipantList } from "@/components/pages/tournament/participant-list";
 
 const Page = () => {
