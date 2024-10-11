@@ -62,9 +62,9 @@ export const ParticipantBracket: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen px-4 py-12sm:px-6 lg:px-8">
+    <div className="py-12sm:px-6 min-h-screen px-4 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <h1 className="mb-8 text-center text-3xl font-bold text-gray-900 dark:text-gray-100">
+        <h1 className="mb-8 mt-6 text-center text-3xl font-bold text-gray-900 dark:text-gray-100">
           Turnier Übersicht
         </h1>
 
