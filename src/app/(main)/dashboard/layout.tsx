@@ -14,15 +14,13 @@ interface layoutProps {
 const layout: React.FC<layoutProps> = async ({ children }) => {
   const queryClient = getQueryClient();
 
-  await Promise.all([
-    queryClient.prefetchQuery({
-      queryKey: ["tournament"],
-      queryFn: async () => {
-        const data = handleEden(await rpc.api.tournament.get());
-
-        return data;
-      },
-    }),
+  queryClient.prefetchQuery({
+    queryKey: ["tournament"],
+    queryFn: async () => {
+      const data = handleEden(await rpc.api.tournament.get());
+      return data;
+    },
+  }),
     queryClient.prefetchQuery({
       queryKey: ["tournamentUser"],
       queryFn: async () => {
@@ -30,8 +28,7 @@ const layout: React.FC<layoutProps> = async ({ children }) => {
 
         return data;
       },
-    }),
-  ]);
+    });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
