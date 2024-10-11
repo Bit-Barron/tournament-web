@@ -38,7 +38,7 @@ export default function TournamentEntry() {
         tournamentId,
       })
       .then(() => {
-        router.push("/leaderboard");
+        alert("Du hast erfolgreich am Turnier teilgenommen!");
       })
       .catch((err) => {
         console.error(err);
