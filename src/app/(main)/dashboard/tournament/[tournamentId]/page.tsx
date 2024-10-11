@@ -4,7 +4,7 @@ import React from "react";
 import { TournamentHook } from "@/components/hooks/tournament-hook";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { getStatusStyle } from "@/components/utils/helper";
-import { ParticipantList } from "@/components/pages/tournament/participant-list";
+import { ParticipantList } from "@/components/pages/participants/participant-list";
 
 const Page = () => {
   const { tournamentIdQuery, participantsQuery } = TournamentHook();
@@ -20,7 +20,7 @@ const Page = () => {
   }
 
   return (
-    <main className="container mx-auto px-4 py-8">
+    <main className="px-4 py-8">
       <h1 className="mb-6 text-center text-3xl font-bold">
         {tournament?.tournament_name}
       </h1>

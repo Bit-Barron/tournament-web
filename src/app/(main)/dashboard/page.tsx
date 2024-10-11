@@ -3,10 +3,10 @@
 import { MyCard } from "@/components/elements/card";
 import { TournamentHook } from "@/components/hooks/tournament-hook";
 import { UserHook } from "@/components/hooks/user-hook";
-import { CreateTournament } from "@/components/pages/dashboard/create-tournament";
-import { OngoingTournaments } from "@/components/pages/dashboard/elements/active-tourneys";
-import { RecentResults } from "@/components/pages/dashboard/elements/result-card";
-import { UpcomingMatches } from "@/components/pages/dashboard/elements/match-list";
+import { CreateTournament } from "@/components/pages/dashboard/tournament-create";
+import { OngoingTournaments } from "@/components/pages/dashboard/elements/tournament-active";
+import { RecentResults } from "@/components/pages/dashboard/elements/tournament-card";
+import { UpcomingMatches } from "@/components/pages/dashboard/elements/tournament-matchlist";
 import { FaCalendarAlt, FaDollarSign, FaTrophy, FaUsers } from "react-icons/fa";
 
 export default function MainPage() {
@@ -14,7 +14,6 @@ export default function MainPage() {
   const { tournamentQuery } = TournamentHook();
   const tournamentData = tournamentQuery.data || [];
 
-  
   return (
     <div className="bg-background p-8">
       <div className="mb-8 flex items-center justify-between">
