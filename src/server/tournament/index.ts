@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import Elysia, { InternalServerError } from "elysia";
 import {
   participantSchema,
+  sendUserSchema,
   tournamentCreateSchema,
   tournamentSchema,
   tournamentWinnerSchema,
@@ -189,4 +190,22 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
       console.error(err);
       throw new InternalServerError(err as string);
     }
-  });
+  })
+  .post(
+    "/send-user",
+    async (ctx) => {
+      const { roundNumber, username, brawlstars_id, discord_id } = ctx.body;
+
+      console.log({
+        roundNumber,
+        username,
+        brawlstars_id,
+        discord_id,
+      });
+
+      const ENDPOINT = "";
+
+      return ENDPOINT;
+    },
+    { body: sendUserSchema },
+  );

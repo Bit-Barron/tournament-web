@@ -27,3 +27,10 @@ export const tournamentWinnerSchema = t.Object({
   winnerId: t.Number({ minLength: 1, maxLength: 128 }),
   roundNumber: t.Number({ minLength: 1, maxLength: 128 }),
 });
+
+export const sendUserSchema = t.Object({
+  roundNumber: t.Number({ minLength: 1, maxLength: 128 }),
+  username: t.String({ minLength: 1, maxLength: 128 }),
+  brawlstars_id: t.String({ minLength: 1, maxLength: 128 }),
+  discord_id: t.String({ minLength: 1, maxLength: 128 }),
+});

@@ -17,6 +17,7 @@ export const ParticipantBracket: React.FC = () => {
     participantsQuery,
     tournamentWinnersQuery,
     tournamentWinnersMutation,
+    sendUserMutation,
   } = TournamentHook();
   const params = useParams();
   const [rounds, setRounds] = useState<any[][]>([]);
@@ -36,6 +37,12 @@ export const ParticipantBracket: React.FC = () => {
     }
   }, [participantsQuery.data]);
 
+  useEffect(() => {
+    if (rounds.length > 0 && selectedRound > 0) {
+      sendCurrentRoundData(selectedRound);
+    }
+  }, [rounds, selectedRound]);
+
   const updateCurrentRoundParticipants = (roundNumber: number) => {
     if (rounds[roundNumber - 1]) {
       const brawlStarsIds = rounds[roundNumber - 1].map(
@@ -44,7 +51,23 @@ export const ParticipantBracket: React.FC = () => {
       setCurrentRoundParticipants(brawlStarsIds);
     }
   };
-  console.log(currentRoundParticipants);
+
+  const sendCurrentRoundData = async (roundNumber: number) => {
+    if (rounds[roundNumber - 1]) {
+      for (const participant of rounds[roundNumber - 1]) {
+        try {
+          await sendUserMutation.mutateAsync({
+            roundNumber,
+            username: participant.username,
+            brawlstars_id: participant.brawlstars_id,
+            discord_id: participant.discord_id,
+          });
+        } catch (error) {
+          console.error("Error sending participant data:", error);
+        }
+      }
+    }
+  };
 
   const handleWinnerSelection = async (
     participant: any,
@@ -63,9 +86,22 @@ export const ParticipantBracket: React.FC = () => {
         winnerId: participant.id,
       });
       tournamentWinnersQuery.refetch();
+
+      await sendUserMutation.mutateAsync({
+        roundNumber: roundIndex + 1,
+        username: participant.username,
+        brawlstars_id: participant.brawlstars_id,
+        discord_id: participant.discord_id,
+      });
     } catch (error) {
       console.error("Error selecting winner:", error);
     }
+  };
+
+  const handleRoundChange = (value: string) => {
+    const roundNumber = Number(value);
+    setSelectedRound(roundNumber);
+    updateCurrentRoundParticipants(roundNumber);
   };
 
   return (
@@ -78,11 +114,7 @@ export const ParticipantBracket: React.FC = () => {
         <div className="mb-8 flex justify-center">
           <Select
             value={selectedRound.toString()}
-            onValueChange={(value) => {
-              const roundNumber = Number(value);
-              setSelectedRound(roundNumber);
-              updateCurrentRoundParticipants(roundNumber);
-            }}
+            onValueChange={handleRoundChange}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Wähle eine Runde" />
