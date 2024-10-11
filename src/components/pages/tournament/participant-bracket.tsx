@@ -55,11 +55,22 @@ export const ParticipantBracket: React.FC<ParticipantBracketProps> = () => {
     }
   };
 
+  const handleRoundClick = (roundIndex: number) => {
+    const brawlStarsIds = rounds[roundIndex].map(
+      (participant) => participant.brawlstars_id,
+    );
+    console.log(`Brawl Stars IDs for Round ${roundIndex + 1}:`, brawlStarsIds);
+  };
+
   return (
     <section className="p-4">
       <h1 className="mb-4 text-2xl font-bold">Turnier Übersicht</h1>
       <Select
-        onValueChange={(value) => setSelectedRound(Number(value))}
+        onValueChange={(value) => {
+          const roundNumber = Number(value);
+          setSelectedRound(roundNumber);
+          handleRoundClick(roundNumber - 1);
+        }}
         defaultValue={selectedRound.toString()}
       >
         <SelectTrigger className="mb-4 w-[180px]">

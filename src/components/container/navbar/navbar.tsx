@@ -25,7 +25,7 @@ export const Navbar = () => {
         <div className="mr-4 hidden md:flex">
           <a className="ml-2 mr-3 flex items-center space-x-2" href="/">
             <FaTrophy className="h-6 w-6" />
-            <span className="hidden sm:inline-block">
+            <span className="hidden font-bold sm:inline-block">
               {meQuery?.data?.username}
             </span>
           </a>
@@ -41,7 +41,7 @@ export const Navbar = () => {
                 }}
               >
                 <item.icon className="mr-2 h-4 w-4" />
-                <span className="font-normal">{item.name}</span>
+                <span className="font-bold">{item.name}</span>
               </Button>
             ))}
           </nav>
