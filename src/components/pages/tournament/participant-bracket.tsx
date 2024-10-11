@@ -21,6 +21,9 @@ export const ParticipantBracket: React.FC = () => {
   const params = useParams();
   const [rounds, setRounds] = useState<any[][]>([]);
   const [selectedRound, setSelectedRound] = useState<number>(1);
+  const [currentRoundParticipants, setCurrentRoundParticipants] = useState<
+    string[]
+  >([]);
 
   useEffect(() => {
     if (participantsQuery.data) {
@@ -29,8 +32,19 @@ export const ParticipantBracket: React.FC = () => {
         roundsData.push(participantsQuery.data.slice(i, i + 10));
       }
       setRounds(roundsData);
+      updateCurrentRoundParticipants(1);
     }
   }, [participantsQuery.data]);
+
+  const updateCurrentRoundParticipants = (roundNumber: number) => {
+    if (rounds[roundNumber - 1]) {
+      const brawlStarsIds = rounds[roundNumber - 1].map(
+        (participant) => participant.brawlstars_id,
+      );
+      setCurrentRoundParticipants(brawlStarsIds);
+    }
+  };
+  console.log(currentRoundParticipants);
 
   const handleWinnerSelection = async (
     participant: any,
@@ -54,15 +68,8 @@ export const ParticipantBracket: React.FC = () => {
     }
   };
 
-  const handleRoundClick = (roundIndex: number) => {
-    const brawlStarsIds = rounds[roundIndex].map(
-      (participant) => participant.brawlstars_id,
-    );
-    console.log(`Brawl Stars IDs for Round ${roundIndex + 1}:`, brawlStarsIds);
-  };
-
   return (
-    <div className="py-12sm:px-6 min-h-screen px-4 lg:px-8">
+    <div className="min-h-screen px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <h1 className="mb-8 mt-6 text-center text-3xl font-bold text-gray-900 dark:text-gray-100">
           Turnier Übersicht
@@ -74,7 +81,7 @@ export const ParticipantBracket: React.FC = () => {
             onValueChange={(value) => {
               const roundNumber = Number(value);
               setSelectedRound(roundNumber);
-              handleRoundClick(roundNumber - 1);
+              updateCurrentRoundParticipants(roundNumber);
             }}
           >
             <SelectTrigger className="w-[180px]">
@@ -88,6 +95,19 @@ export const ParticipantBracket: React.FC = () => {
               ))}
             </SelectContent>
           </Select>
+        </div>
+
+        <div className="mb-8">
+          <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            Teilnehmer in Runde {selectedRound}:
+          </h2>
+          <ul className="list-disc pl-5">
+            {currentRoundParticipants.map((id, index) => (
+              <li key={index} className="text-gray-600 dark:text-gray-400">
+                Brawl Stars ID: {id}
+              </li>
+            ))}
+          </ul>
         </div>
 
         {rounds[selectedRound - 1] && (
