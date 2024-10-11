@@ -14,7 +14,6 @@ import { CreateTournament } from "@/components/pages/dashboard/create-tournament
 
 export const Navbar = () => {
   const dashboardStore = useSnapshot(DashboardStore);
-  const [activeTab, setActiveTab] = useState<string>("Dashboard");
   const { meQuery } = UserHook();
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const router = useRouter();
@@ -36,7 +35,6 @@ export const Navbar = () => {
                 variant="ghost"
                 className={`h-8`}
                 onClick={() => {
-                  setActiveTab(item.name);
                   router.push(item.href);
                 }}
               >
@@ -79,7 +77,6 @@ export const Navbar = () => {
                 variant="ghost"
                 className="w-full justify-start"
                 onClick={() => {
-                  setActiveTab(item.name);
                   setMobileMenuOpen(false);
                 }}
               >

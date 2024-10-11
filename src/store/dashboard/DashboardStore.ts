@@ -9,4 +9,8 @@ export const DashboardStore = proxy({
     { name: "Dashboard", href: "/dashboard/", icon: FiLayout },
     { name: "Tournaments", href: "/dashboard/tournament", icon: IoIosTrophy },
   ],
+  activeTab: "Dashboard",
+  setActiveTab: (tabName: string) => {
+    DashboardStore.activeTab = tabName;
+  },
 });

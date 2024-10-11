@@ -21,19 +21,28 @@ import { Trophy } from "lucide-react";
 import { HomeStore } from "@/store/home/HomeStore";
 import { useSnapshot } from "valtio";
 import { TournamentHook } from "@/components/hooks/tournament-hook";
+import { useRouter } from "next/navigation";
 
 export default function TournamentEntry() {
   const { tournamentId, brawlStarsId, username } = useSnapshot(HomeStore);
   const { createUserMutation, tournamentQuery } = TournamentHook();
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    createUserMutation.mutateAsync({
-      discord_id: "Created on the website",
-      username,
-      brawlstars_id: brawlStarsId,
-      tournamentId,
-    });
+    createUserMutation
+      .mutateAsync({
+        discord_id: "Created on the website",
+        username,
+        brawlstars_id: brawlStarsId,
+        tournamentId,
+      })
+      .then(() => {
+        router.push("/leaderboard");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (

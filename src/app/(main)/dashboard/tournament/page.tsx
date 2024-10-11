@@ -27,21 +27,20 @@ const TournamentPage: React.FC = () => {
       tournamentQuery.refetch();
     } catch (error) {
       toast.error("Failed to delete tournament");
-      console.error("Failed to delete tournament:", error);
     }
   };
 
   const tournaments = tournamentQuery.data || [];
 
   return (
-    <div className="flex flex-col items-center min-h-screen py-8">
+    <div className="flex min-h-screen flex-col items-center py-8">
       <h1 className="mb-8 text-3xl font-bold">All Tournaments</h1>
       {tournaments.length === 0 && (
         <div className="flex h-32 items-center justify-center">
           No tournaments found
         </div>
       )}
-      <div className="max-w-7xl w-full px-4">
+      <div className="w-full max-w-7xl px-4">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {tournaments.map((tournament) => (
             <Card key={tournament.id}>

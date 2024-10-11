@@ -19,6 +19,8 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { useParams } from "next/navigation";
+import { ParticipantStore } from "@/store/tournament/ParticipantStore";
+import { useSnapshot } from "valtio";
 
 export const ParticipantList = () => {
   const {
@@ -27,8 +29,7 @@ export const ParticipantList = () => {
     tournamentWinnersQuery,
     tournamentWinnersMutation,
   } = TournamentHook();
-  const [rounds, setRounds] = useState<any[][]>([]);
-  const [selectedRound, setSelectedRound] = useState<number>(1);
+  const { rounds, selectedRound } = useSnapshot(ParticipantStore);
   const params = useParams();
 
   useEffect(() => {
@@ -37,7 +38,7 @@ export const ParticipantList = () => {
       for (let i = 0; i < participantsQuery.data.length; i += 10) {
         roundsData.push(participantsQuery.data.slice(i, i + 10));
       }
-      setRounds(roundsData);
+      ParticipantStore.rounds = roundsData;
     }
   }, [participantsQuery.data]);
 
@@ -50,12 +51,7 @@ export const ParticipantList = () => {
       toast.success(`Participant ${discord_id} deleted successfully`);
     } catch (error) {
       toast.error("Error deleting participant");
-      console.error("Error deleting participant:", error);
     }
-  };
-
-  const handleRoundChange = (value: string) => {
-    setSelectedRound(Number(value));
   };
 
   const handleWinnerSelection = async (participant: any) => {
@@ -77,7 +73,6 @@ export const ParticipantList = () => {
       );
     } catch (error) {
       toast.error("Error selecting winner");
-      console.error("Error selecting winner:", error);
     }
   };
 
@@ -96,7 +91,9 @@ export const ParticipantList = () => {
           <span>Participant List</span>
           <Select
             value={selectedRound.toString()}
-            onValueChange={handleRoundChange}
+            onValueChange={(value) => {
+              ParticipantStore.selectedRound = parseInt(value);
+            }}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Select Round" />

@@ -23,7 +23,6 @@ export default function LoginPage(props: LoginPageProps) {
   const { loginMutation } = AuthHook();
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [status, setStatus] = useState<string>("");
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -33,7 +32,7 @@ export default function LoginPage(props: LoginPageProps) {
         password,
       })
       .then((user) =>
-        user ? router.push("/dashboard") : setStatus(user as string),
+        user ? router.push("/dashboard") : toast.error("Invalid credentials"),
       )
       .catch(() => toast.error("Ein Fehler ist aufgetreten"));
   };
