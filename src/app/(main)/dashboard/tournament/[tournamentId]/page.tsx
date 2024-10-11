@@ -24,7 +24,6 @@ const Page = () => {
       <h1 className="mb-6 text-center text-3xl font-bold">
         {tournament?.tournament_name}
       </h1>
-
       <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardHeader>
@@ -46,7 +45,6 @@ const Page = () => {
             </p>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader>
             <CardTitle>Status</CardTitle>
@@ -59,7 +57,6 @@ const Page = () => {
             </span>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader>
             <CardTitle>Participants</CardTitle>
@@ -74,7 +71,6 @@ const Page = () => {
           </CardContent>
         </Card>
       </div>
-
       <ParticipantList />
     </main>
   );

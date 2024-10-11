@@ -34,12 +34,10 @@ export const Navbar = () => {
                 key={item.name}
                 variant="ghost"
                 className={`h-8`}
-                onClick={() => {
-                  router.push(item.href);
-                }}
+                onClick={() => router.push(item.href)}
               >
                 <item.icon className="mr-2 h-4 w-4" />
-                <span className="font-bold">{item.name}</span>
+                <span>{item.name}</span>
               </Button>
             ))}
           </nav>
@@ -54,16 +52,6 @@ export const Navbar = () => {
           <span className="sr-only">Toggle menu</span>
         </Button>
         <div className="ml-auto flex items-center space-x-4">
-          <form className="hidden lg:block">
-            <div className="relative">
-              <CiSearch className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search tournaments..."
-                className="w-[200px] pl-8 md:w-[250px] lg:w-[300px]"
-              />
-            </div>
-          </form>
           <CreateTournament variant={"ghost"} />
           <ThemeToggle />
         </div>

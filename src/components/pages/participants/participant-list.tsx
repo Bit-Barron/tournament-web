@@ -28,6 +28,7 @@ export const ParticipantList = () => {
     participantDeleteMutation,
     tournamentWinnersQuery,
     tournamentWinnersMutation,
+    sendUserMutation,
   } = TournamentHook();
   const { rounds, selectedRound } = useSnapshot(ParticipantStore);
   const params = useParams();
@@ -39,8 +40,37 @@ export const ParticipantList = () => {
         roundsData.push(participantsQuery.data.slice(i, i + 10));
       }
       ParticipantStore.rounds = roundsData;
+
+      if (selectedRound === 1) {
+        sendDataToAPI(roundsData[0]);
+      }
     }
   }, [participantsQuery.data]);
+
+  const sendDataToAPI = async (
+    participants: readonly {
+      readonly id: number;
+      readonly username: string;
+      readonly brawlstars_id: string;
+      readonly discord_id: string;
+      readonly createdAt: Date;
+      readonly updatedAt: Date;
+      readonly role: "USER" | "BANNED";
+    }[],
+  ) => {
+    for (const participant of participants) {
+      try {
+        await sendUserMutation.mutateAsync({
+          roundNumber: selectedRound,
+          username: participant.username,
+          brawlstars_id: participant.brawlstars_id,
+          discord_id: participant.discord_id,
+        });
+      } catch (error) {
+        toast.error(`Error sending data for ${participant.username}`);
+      }
+    }
+  };
 
   const deleteUser = async (discord_id: string) => {
     try {
@@ -84,6 +114,12 @@ export const ParticipantList = () => {
     );
   };
 
+  const handleRoundChange = (value: string) => {
+    const newRound = parseInt(value);
+    ParticipantStore.selectedRound = newRound;
+    sendDataToAPI(rounds[newRound - 1]);
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -91,9 +127,7 @@ export const ParticipantList = () => {
           <span>Participant List</span>
           <Select
             value={selectedRound.toString()}
-            onValueChange={(value) => {
-              ParticipantStore.selectedRound = parseInt(value);
-            }}
+            onValueChange={handleRoundChange}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Select Round" />
@@ -113,7 +147,6 @@ export const ParticipantList = () => {
           <TableHeader>
             <TableRow>
               <TableHead>Number</TableHead>
-
               <TableHead>Username</TableHead>
               <TableHead>Brawl Stars ID</TableHead>
               <TableHead>Discord ID</TableHead>
