@@ -6,7 +6,6 @@ import { TournamentHook } from "@/components/hooks/tournament-hook";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { getStatusStyle } from "@/components/utils/constants";
 import { ParticipantList } from "@/components/pages/tournament/participant-list";
-import { ParticipantBracket } from "@/components/pages/tournament/participant-bracket";
 
 const Page = () => {
   const { tournamentIdQuery, participantsQuery } = TournamentHook();
@@ -78,8 +77,6 @@ const Page = () => {
       </div>
 
       <ParticipantList />
-
-      <ParticipantBracket />
     </main>
   );
 };

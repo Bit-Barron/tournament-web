@@ -34,64 +34,66 @@ const TournamentPage: React.FC = () => {
   const tournaments = tournamentQuery.data || [];
 
   return (
-    <div className="mx-auto py-8">
-      <h1 className="mb-8 text-center text-3xl font-bold">All Tournaments</h1>
+    <div className="flex flex-col items-center min-h-screen py-8">
+      <h1 className="mb-8 text-3xl font-bold">All Tournaments</h1>
       {tournaments.length === 0 && (
         <div className="flex h-32 items-center justify-center">
           No tournaments found
         </div>
       )}
-      <div className="mx-auto grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {tournaments.map((tournament) => (
-          <Card key={tournament.id}>
-            <CardHeader>
-              <CardTitle>
-                {tournament.tournament_name || "Unnamed Tournament"}
-              </CardTitle>
-              <CardDescription>{tournament.status}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-col space-y-2">
-                <div className="flex items-center">
-                  <CalendarDays className="mr-2 h-4 w-4" />
-                  <span>
-                    {new Date(tournament.start_date).toLocaleDateString()}
-                  </span>
-                </div>
-                <div className="flex items-center">
-                  <MapPin className="mr-2 h-4 w-4" />
-                  <span>{tournament.game_type}</span>
-                </div>
-                <div className="flex items-center">
-                  <Users className="mr-2 h-4 w-4" />
-                  <span>{tournament.max_participants} participants</span>
-                </div>
-                <div className="font-medium">
-                  Hosted by {tournament.hosted_by}
-                </div>
-                <div className="flex space-x-3">
+      <div className="max-w-7xl w-full px-4">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {tournaments.map((tournament) => (
+            <Card key={tournament.id}>
+              <CardHeader>
+                <CardTitle>
+                  {tournament.tournament_name || "Unnamed Tournament"}
+                </CardTitle>
+                <CardDescription>{tournament.status}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-col space-y-2">
+                  <div className="flex items-center">
+                    <CalendarDays className="mr-2 h-4 w-4" />
+                    <span>
+                      {new Date(tournament.start_date).toLocaleDateString()}
+                    </span>
+                  </div>
+                  <div className="flex items-center">
+                    <MapPin className="mr-2 h-4 w-4" />
+                    <span>{tournament.game_type}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Users className="mr-2 h-4 w-4" />
+                    <span>{tournament.max_participants} participants</span>
+                  </div>
+                  <div className="font-medium">
+                    Hosted by {tournament.hosted_by}
+                  </div>
+                  <div className="flex space-x-3">
+                    <Button
+                      onClick={() => handleDelete(tournament.id)}
+                      className="w-full"
+                      variant="destructive"
+                    >
+                      <Trash2Icon className="h-6" />
+                      Delete
+                    </Button>
+                  </div>
                   <Button
-                    onClick={() => handleDelete(tournament.id)}
+                    onClick={() =>
+                      router.push(`/dashboard/tournament/${tournament.id}`)
+                    }
                     className="w-full"
-                    variant="destructive"
+                    variant="secondary"
                   >
-                    <Trash2Icon className="h-6" />
-                    Delete
+                    Manage Tournament
                   </Button>
                 </div>
-                <Button
-                  onClick={() =>
-                    router.push(`/dashboard/tournament/${tournament.id}`)
-                  }
-                  className="w-full"
-                  variant="secondary"
-                >
-                  Manage Tournament
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
   );
