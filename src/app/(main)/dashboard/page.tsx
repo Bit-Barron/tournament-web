@@ -7,17 +7,12 @@ import { CreateTournament } from "@/components/pages/dashboard/create-tournament
 import { OngoingTournaments } from "@/components/pages/dashboard/elements/active-tourneys";
 import { RecentResults } from "@/components/pages/dashboard/elements/result-card";
 import { UpcomingMatches } from "@/components/pages/dashboard/elements/match-list";
-import {
-  recentResults,
-  upcomingMatches,
-} from "@/components/pages/dashboard/utils/constants";
 import { FaCalendarAlt, FaDollarSign, FaTrophy, FaUsers } from "react-icons/fa";
 
 export default function MainPage() {
   const { meQuery } = UserHook();
-  const { tournamentQuery, tournamentUserQuery } = TournamentHook();
+  const { tournamentQuery } = TournamentHook();
   const tournamentData = tournamentQuery.data || [];
-  const tournamentUserData = tournamentUserQuery.data || [];
 
   return (
     <div className="bg-background p-8">
@@ -42,7 +37,7 @@ export default function MainPage() {
         />
         <MyCard
           cardTitle="Active Players"
-          cardStat={tournamentUserData.length || 0}
+          cardStat={tournamentData.length || 0}
           lastMonth={"+18 from last week"}
           CardIcon={FaUsers}
         />
@@ -61,8 +56,8 @@ export default function MainPage() {
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <OngoingTournaments tournaments={tournamentData} />
-        <RecentResults results={recentResults} />
-        <UpcomingMatches matches={upcomingMatches} />
+        <RecentResults />
+        <UpcomingMatches />
       </div>
     </div>
   );
