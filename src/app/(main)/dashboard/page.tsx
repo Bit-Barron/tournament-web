@@ -14,6 +14,7 @@ export default function MainPage() {
   const { tournamentQuery } = TournamentHook();
   const tournamentData = tournamentQuery.data || [];
 
+  
   return (
     <div className="bg-background p-8">
       <div className="mb-8 flex items-center justify-between">
