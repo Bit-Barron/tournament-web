@@ -10,10 +10,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Trophy } from "lucide-react";
 
-interface ParticipantBracketProps {}
-
-export const ParticipantBracket: React.FC<ParticipantBracketProps> = () => {
+export const ParticipantBracket: React.FC = () => {
   const {
     participantsQuery,
     tournamentWinnersQuery,
@@ -63,32 +62,36 @@ export const ParticipantBracket: React.FC<ParticipantBracketProps> = () => {
   };
 
   return (
-    <section className="p-4">
-      <h1 className="mb-4 text-2xl font-bold">Turnier Übersicht</h1>
-      <Select
-        onValueChange={(value) => {
-          const roundNumber = Number(value);
-          setSelectedRound(roundNumber);
-          handleRoundClick(roundNumber - 1);
-        }}
-        defaultValue={selectedRound.toString()}
-      >
-        <SelectTrigger className="mb-4 w-[180px]">
-          <SelectValue placeholder="Wähle eine Runde" />
-        </SelectTrigger>
-        <SelectContent>
-          {rounds.map((_, index) => (
-            <SelectItem key={index + 1} value={(index + 1).toString()}>
-              Runde {index + 1}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+    <div className="min-h-screen px-4 py-12sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <h1 className="mb-8 text-center text-3xl font-bold text-gray-900 dark:text-gray-100">
+          Turnier Übersicht
+        </h1>
 
-      {rounds[selectedRound - 1] && (
-        <div className="mb-8">
-          <h2 className="mb-2 text-xl font-semibold">Runde {selectedRound}</h2>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="mb-8 flex justify-center">
+          <Select
+            value={selectedRound.toString()}
+            onValueChange={(value) => {
+              const roundNumber = Number(value);
+              setSelectedRound(roundNumber);
+              handleRoundClick(roundNumber - 1);
+            }}
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Wähle eine Runde" />
+            </SelectTrigger>
+            <SelectContent>
+              {rounds.map((_, index) => (
+                <SelectItem key={index + 1} value={(index + 1).toString()}>
+                  Runde {index + 1}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        {rounds[selectedRound - 1] && (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {rounds[selectedRound - 1].map((participant) => {
               const isWinner = tournamentWinnersQuery.data?.some(
                 (winner) =>
@@ -98,35 +101,48 @@ export const ParticipantBracket: React.FC<ParticipantBracketProps> = () => {
               return (
                 <Card
                   key={participant.id}
-                  className={isWinner ? "border-2 border-green-500" : ""}
+                  className={`overflow-hidden transition-all duration-200 ${
+                    isWinner ? "ring-2 ring-yellow-500" : ""
+                  }`}
                 >
-                  <CardHeader>
-                    <CardTitle>{participant.username}</CardTitle>
+                  <CardHeader className="py-4 dark:bg-gray-800">
+                    <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                      {participant.username}
+                    </CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <p>
-                      <strong>Brawl Stars ID:</strong>{" "}
-                      {participant.brawlstars_id}
+                  <CardContent className="pt-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Brawl Stars ID: {participant.brawlstars_id}
                     </p>
-                    <p>
-                      <strong>Discord ID:</strong> {participant.discord_id}
+                    <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+                      Discord ID: {participant.discord_id}
                     </p>
                     <Button
+                      variant={isWinner ? "default" : "outline"}
+                      className="w-full"
                       onClick={() =>
                         handleWinnerSelection(participant, selectedRound - 1)
                       }
                       disabled={isWinner}
-                      className={isWinner ? "bg-green-500" : ""}
                     >
-                      {isWinner ? "Gewinner" : "Als Gewinner markieren"}
+                      {isWinner ? (
+                        <>
+                          <Trophy className="mr-2 h-4 w-4" />
+                          Gewinner
+                        </>
+                      ) : (
+                        "Als Gewinner markieren"
+                      )}
                     </Button>
                   </CardContent>
                 </Card>
               );
             })}
           </div>
-        </div>
-      )}
-    </section>
+        )}
+      </div>
+    </div>
   );
 };
+
+export default ParticipantBracket;
