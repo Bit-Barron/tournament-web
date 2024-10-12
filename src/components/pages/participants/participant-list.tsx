@@ -60,12 +60,14 @@ export const ParticipantList = () => {
   ) => {
     for (const participant of participants) {
       try {
-        await sendUserMutation.mutateAsync({
+        const test = await sendUserMutation.mutateAsync({
           roundNumber: selectedRound,
           username: participant.username,
           brawlstars_id: participant.brawlstars_id,
           discord_id: participant.discord_id,
         });
+
+        console.log(test);
       } catch (error) {
         toast.error(`Error sending data for ${participant.username}`);
       }

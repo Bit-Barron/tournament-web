@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import Elysia, { InternalServerError } from "elysia";
+import axios from "axios";
 import {
   createUserSchema,
   participantSchema,
@@ -196,16 +197,12 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
     "/send-user",
     async (ctx) => {
       const { roundNumber, username, brawlstars_id, discord_id } = ctx.body;
+      const new_brawlstars_id = "28GR92Y998";
+      const ENDPOINT = `http://0.0.0.0:8000/player/${new_brawlstars_id}`;
 
-      console.log({
-        roundNumber,
-        username,
-        brawlstars_id,
-        discord_id,
-      });
+      const resp = await axios.get(ENDPOINT);
 
-      const ENDPOINT = "";
-
+      console.log(resp.data);
       return ENDPOINT;
     },
     { body: sendUserSchema },
