@@ -62,3 +62,5 @@ export default function MainPage() {
     </div>
   );
 }
+
+export const dynamic = "force-dynamic";

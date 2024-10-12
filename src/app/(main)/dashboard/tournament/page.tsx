@@ -99,3 +99,4 @@ const TournamentPage: React.FC = () => {
 };
 
 export default TournamentPage;
+export const dynamic = 'force-dynamic';
