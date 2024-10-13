@@ -4,9 +4,10 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { TournamentData } from "@/types/tournament";
 
-export const UpcomingMatches: React.FC<{ matches?: TournamentData[] }> = ({
-  matches,
+export const UpcomingMatches: React.FC<{ newMatches?: TournamentData[] }> = ({
+  newMatches,
 }) => {
+  const matches = newMatches?.filter((type) => type.status === "PENDING");
   return (
     <Card className="col-span-2 text-white">
       <CardHeader className="pb-2">

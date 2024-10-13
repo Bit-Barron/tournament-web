@@ -60,10 +60,11 @@ export default function MainPage() {
         <OngoingTournaments tournaments={tournamentData} />
         <RecentResults />
         <UpcomingMatches
-          matches={
+          newMatches={
             tournamentData.map((tournament) => ({
               tournament_name: tournament.tournament_name,
               start_date: tournament.start_date,
+              status: tournament.status,
             })) as any
           }
         />
