@@ -40,7 +40,7 @@ const TournamentPage: React.FC = () => {
           No tournaments found
         </div>
       )}
-      <div className="w-full max-w-7xl px-4">
+      <div className="w-full max-w-8xl px-4">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {tournaments.map((tournament) => (
             <Card key={tournament.id}>
