@@ -14,25 +14,39 @@ interface layoutProps {
 const layout: React.FC<layoutProps> = async ({ children, params }) => {
   const queryClient = getQueryClient();
 
-  await queryClient.prefetchQuery({
-    queryKey: ["tournament", params.tournamentId],
-    queryFn: async () => {
-      const data = handleEden(
-        await rpc.api.tournament[params.tournamentId].get(),
-      );
-      return data;
-    },
-  });
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: ["tournament", params.tournamentId],
+      queryFn: async () => {
+        const data = handleEden(
+          await rpc.api.tournament[params.tournamentId].get(),
+        );
+        return data;
+      },
+    }),
 
-  await queryClient.prefetchQuery({
-    queryKey: ["tournament", params.tournamentId, "participants"],
-    queryFn: async () => {
-      const data = handleEden(
-        await rpc.api.tournament[params.tournamentId].participants.get(),
-      );
-      return data.participants;
-    },
-  });
+    queryClient.prefetchQuery({
+      queryKey: ["tournament", params.tournamentId, "participants"],
+      queryFn: async () => {
+        const data = handleEden(
+          await rpc.api.tournament[params.tournamentId].participants.get(),
+        );
+        return data.participants;
+      },
+    }),
+
+    queryClient.prefetchQuery({
+      queryKey: ["tournament-winners"],
+      queryFn: async () => {
+        const data = handleEden(
+          await rpc.api.tournament["tournament-winners"][
+            params.tournamentId
+          ].get(),
+        );
+        return data;
+      },
+    }),
+  ]);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

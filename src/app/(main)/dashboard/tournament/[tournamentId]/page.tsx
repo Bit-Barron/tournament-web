@@ -4,12 +4,15 @@ import React from "react";
 import { TournamentHook } from "@/components/hooks/tournament-hook";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { getStatusStyle } from "@/components/utils/helper";
-import { ParticipantList } from "@/components/pages/participants/participant-list";
+import { ParticipantList } from "@/components/pages/tournament/participant-list";
+import { TournamentOverviewChart } from "@/components/pages/tournament/tournament-chart";
 
 const Page = () => {
   const { tournamentIdQuery, participantsQuery } = TournamentHook();
   const tournament = tournamentIdQuery.data;
   const participants = participantsQuery.data || [];
+
+  console.log(participants);
 
   if (!tournament) {
     return (
@@ -72,6 +75,21 @@ const Page = () => {
         </Card>
       </div>
       <ParticipantList />
+      <div className="mt-10">
+        <TournamentOverviewChart
+          tournamentData={[
+            { round: 1, participants: 10 },
+            { round: 2, participants: 20 },
+            { round: 3, participants: 30 },
+            { round: 4, participants: 40 },
+            { round: 5, participants: 50 },
+            { round: 6, participants: 60 },
+
+          ]}
+          maxParticipants={60}
+          currentParticipants={participants.length}
+        />
+      </div>
     </main>
   );
 };
