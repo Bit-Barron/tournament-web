@@ -52,14 +52,16 @@ const Page = () => {
             <CardTitle>Status</CardTitle>
           </CardHeader>
           <CardContent>
-            <span className={`rounded-full px-3 py-1 text-sm font-medium`}>
+            <span className={`rounded-full text-sm font-medium`}>
               {tournament.status === "PENDING" ? (
                 <div>
                   <Button>Start tournament now</Button>
                 </div>
               ) : (
-                <div className={`${getStatusStyle(tournament.status)}`}>
-                  {tournament.status}
+                <div>
+                  <span className={`${getStatusStyle(tournament.status)}`}>
+                    {tournament.status}
+                  </span>
                 </div>
               )}
             </span>
