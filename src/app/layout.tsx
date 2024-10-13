@@ -16,6 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full">
+      <link rel="icon" href="/favicon.ico" sizes="any" />
       <body className="h-full">
         <Toaster richColors position="top-right" />
         <QueryProvider>
