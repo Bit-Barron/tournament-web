@@ -58,8 +58,10 @@ const Page = () => {
                   <Button>Start tournament now</Button>
                 </div>
               ) : (
-                <div>
-                  <span className={`${getStatusStyle(tournament.status)}`}>
+                <div className="rounded-full p-2">
+                  <span
+                    className={`${getStatusStyle(tournament.status)} text-white`}
+                  >
                     {tournament.status}
                   </span>
                 </div>
