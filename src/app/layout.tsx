@@ -3,7 +3,6 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
 import { Toaster } from "sonner";
 import dynamic from "next/dynamic";
-import faviconIco from "../../public/favicon.ico";
 
 const ScrollArea = dynamic(
   () => import("@/components/ui/scroll-area").then((mod) => mod.ScrollArea),
