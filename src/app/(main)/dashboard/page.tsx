@@ -1,6 +1,6 @@
 "use client";
 
-import { MyCard } from "@/components/elements/card";
+import { MyCard } from "@/components/pages/dashboard/elements/card";
 import { TournamentHook } from "@/components/hooks/tournament-hook";
 import { UserHook } from "@/components/hooks/user-hook";
 import { CreateTournament } from "@/components/pages/dashboard/tournament-create";
