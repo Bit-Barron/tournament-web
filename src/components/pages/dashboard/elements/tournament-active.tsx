@@ -15,6 +15,9 @@ interface Tournament {
 export const OngoingTournaments: React.FC<{ tournaments: Tournament[] }> = ({
   tournaments,
 }) => {
+  tournaments = tournaments.filter(
+    (tournament) => tournament.status === "ONGOING",
+  );
   const router = useRouter();
   return (
     <Card className="col-span-2">
@@ -32,7 +35,7 @@ export const OngoingTournaments: React.FC<{ tournaments: Tournament[] }> = ({
             {tournaments.map((tournament) => (
               <div
                 key={tournament.id}
-                className="flex hover:text-gray-300 items-center justify-between py-2"
+                className="flex items-center justify-between py-2 hover:text-gray-300"
                 onClick={() =>
                   router.push(`/dashboard/tournament/${tournament.id}`)
                 }

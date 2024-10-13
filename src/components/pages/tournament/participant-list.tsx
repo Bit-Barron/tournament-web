@@ -58,6 +58,7 @@ export const ParticipantList = () => {
       readonly role: "USER" | "BANNED";
     }[],
   ) => {
+    if (!participants) return;
     for (const participant of participants) {
       try {
         const test = await sendUserMutation.mutateAsync({

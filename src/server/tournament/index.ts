@@ -198,12 +198,6 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
     async (ctx) => {
       const { roundNumber, username, brawlstars_id, discord_id } = ctx.body;
       const new_brawlstars_id = "28GR92Y998";
-      const ENDPOINT = `http://0.0.0.0:8000/player/${new_brawlstars_id}`;
-
-      const resp = await axios.get(ENDPOINT);
-
-      console.log(resp.data);
-      return ENDPOINT;
     },
     { body: sendUserSchema },
   )

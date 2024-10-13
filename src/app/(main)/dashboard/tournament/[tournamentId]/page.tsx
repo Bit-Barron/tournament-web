@@ -6,6 +6,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { getStatusStyle } from "@/components/utils/helper";
 import { ParticipantList } from "@/components/pages/tournament/participant-list";
 import { TournamentOverviewChart } from "@/components/pages/tournament/tournament-chart";
+import { Button } from "@/components/ui/button";
 
 const Page = () => {
   const { tournamentIdQuery, participantsQuery } = TournamentHook();
@@ -51,10 +52,16 @@ const Page = () => {
             <CardTitle>Status</CardTitle>
           </CardHeader>
           <CardContent>
-            <span
-              className={`rounded-full px-3 py-1 text-sm font-medium ${getStatusStyle(tournament.status)}`}
-            >
-              {tournament.status}
+            <span className={`rounded-full px-3 py-1 text-sm font-medium`}>
+              {tournament.status === "PENDING" ? (
+                <div>
+                  <Button>Start tournament now</Button>
+                </div>
+              ) : (
+                <div className={`${getStatusStyle(tournament.status)}`}>
+                  {tournament.status}
+                </div>
+              )}
             </span>
           </CardContent>
         </Card>
