@@ -32,7 +32,7 @@ export const OngoingTournaments: React.FC<{ tournaments: Tournament[] }> = ({
             {tournaments.map((tournament) => (
               <div
                 key={tournament.id}
-                className="flex items-center justify-between py-2"
+                className="flex hover:text-gray-300 items-center justify-between py-2"
                 onClick={() =>
                   router.push(`/dashboard/tournament/${tournament.id}`)
                 }
