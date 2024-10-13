@@ -8,14 +8,13 @@ import { OngoingTournaments } from "@/components/pages/dashboard/elements/tourna
 import { RecentResults } from "@/components/pages/dashboard/elements/tournament-card";
 import { UpcomingMatches } from "@/components/pages/dashboard/elements/tournament-matchlist";
 import { FaCalendarAlt, FaDollarSign, FaTrophy, FaUsers } from "react-icons/fa";
+import TournamentChart from "@/components/pages/dashboard/tournament-chart";
 
 export default function MainPage() {
   const { meQuery } = UserHook();
   const { tournamentQuery, tournamentUserQuery } = TournamentHook();
   const tournamentData = tournamentQuery.data || [];
   const tournamentUserData = tournamentUserQuery.data || [];
-
-  console.log(tournamentUserData);
 
   return (
     <div className="bg-background p-8">
@@ -61,6 +60,7 @@ export default function MainPage() {
         <OngoingTournaments tournaments={tournamentData} />
         <RecentResults />
         <UpcomingMatches />
+        <TournamentChart />
       </div>
     </div>
   );
