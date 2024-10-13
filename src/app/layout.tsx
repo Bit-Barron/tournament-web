@@ -26,6 +26,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+           
             <div className="flex h-full flex-col">
               <ScrollArea className="flex-grow">{children}</ScrollArea>
             </div>
