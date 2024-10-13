@@ -43,6 +43,8 @@ const layout: React.FC<layoutProps> = async ({ children, params }) => {
             params.tournamentId
           ].get(),
         );
+
+        console.log(data);
         return data;
       },
     }),

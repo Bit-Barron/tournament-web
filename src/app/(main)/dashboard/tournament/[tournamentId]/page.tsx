@@ -12,8 +12,6 @@ const Page = () => {
   const tournament = tournamentIdQuery.data;
   const participants = participantsQuery.data || [];
 
-  console.log(participants);
-
   if (!tournament) {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -84,7 +82,6 @@ const Page = () => {
             { round: 4, participants: 40 },
             { round: 5, participants: 50 },
             { round: 6, participants: 60 },
-
           ]}
           maxParticipants={60}
           currentParticipants={participants.length}
