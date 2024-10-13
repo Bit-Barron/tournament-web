@@ -59,7 +59,14 @@ export default function MainPage() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <OngoingTournaments tournaments={tournamentData} />
         <RecentResults />
-        <UpcomingMatches />
+        <UpcomingMatches
+          matches={
+            tournamentData.map((tournament) => ({
+              tournament_name: tournament.tournament_name,
+              start_date: tournament.start_date,
+            })) as any
+          }
+        />
         <TournamentChart />
       </div>
     </div>
