@@ -8,6 +8,7 @@ import { OngoingTournaments } from "@/components/pages/dashboard/elements/tourna
 import { RecentResults } from "@/components/pages/dashboard/elements/tournament-card";
 import { UpcomingMatches } from "@/components/pages/dashboard/elements/tournament-matchlist";
 import { FaCalendarAlt, FaDollarSign, FaTrophy, FaUsers } from "react-icons/fa";
+import { ParticipantChart } from "@/components/pages/dashboard/tournament-chart";
 
 export default function MainPage() {
   const { meQuery } = UserHook();
@@ -58,6 +59,7 @@ export default function MainPage() {
         <OngoingTournaments tournaments={tournamentData} />
         <RecentResults />
         <UpcomingMatches />
+        <ParticipantChart />
       </div>
     </div>
   );
