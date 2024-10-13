@@ -15,7 +15,7 @@ export const UpcomingMatches: React.FC<{ matches?: TournamentData[] }> = ({
         </CardTitle>
       </CardHeader>
       <CardContent className="p-0">
-        <ScrollArea className="h-[450px]">
+        <ScrollArea className="h-[500px]">
           <div className="px-6">
             {matches && matches.length > 0 ? (
               matches.map((match, index) => (
