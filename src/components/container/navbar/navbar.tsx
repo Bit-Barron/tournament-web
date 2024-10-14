@@ -65,6 +65,7 @@ export const Navbar = () => {
                 variant="ghost"
                 className="w-full justify-start"
                 onClick={() => {
+                  router.push(item.href);
                   setMobileMenuOpen(false);
                 }}
               >
