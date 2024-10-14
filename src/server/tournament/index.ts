@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import Elysia, { InternalServerError } from "elysia";
 import axios from "axios";
 import {
+  changeTournamentStatusSchema,
   createUserSchema,
   participantSchema,
   sendUserSchema,
@@ -222,4 +223,24 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
       }
     },
     { body: createUserSchema },
+  )
+  .patch(
+    "/change-status",
+    async (ctx) => {
+      const { tournamentId, status } = ctx.body;
+      if (!tournamentId || !status) {
+        throw new InternalServerError("Invalid request");
+      }
+      const tournament = await prisma.tournament.update({
+        where: {
+          id: Number(tournamentId),
+        },
+        data: {
+          status: status,
+        },
+      });
+      return tournament;
+    },
+
+    { body: changeTournamentStatusSchema },
   );

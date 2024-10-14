@@ -1,10 +1,21 @@
-import { t } from "elysia";
+import { Type as t } from "@sinclair/typebox/type";
 
 export enum GAMETYPE {
   SOLO = "SOLO",
   DUO = "DUO",
   TRIOS = "TRIOS",
 }
+
+export const changeTournamentStatusSchema = t.Object({
+  status: t.Union([
+    t.Literal("PENDING"),
+    t.Literal("ONGOING"),
+    t.Literal("CANCELED"),
+    t.Literal("COMPLETED"),
+
+  ]),
+  tournamentId: t.Number({ minLength: 1, maxLength: 128 }),
+});
 
 export const tournamentSchema = t.Object({
   tournamentId: t.Number({ minLength: 1, maxLength: 128 }),

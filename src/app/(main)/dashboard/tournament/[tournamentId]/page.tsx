@@ -6,7 +6,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { getStatusStyle } from "@/components/utils/helper";
 import { ParticipantList } from "@/components/pages/tournament/participant-list";
 import { TournamentOverviewChart } from "@/components/pages/tournament/tournament-chart";
-import { Button } from "@/components/ui/button";
+import { TournamentCombobox } from "@/components/pages/dashboard/tournament-combobox";
 
 const Page = () => {
   const { tournamentIdQuery, participantsQuery } = TournamentHook();
@@ -53,19 +53,16 @@ const Page = () => {
           </CardHeader>
           <CardContent>
             <span className={`rounded-full text-sm font-medium`}>
-              {tournament.status === "PENDING" ? (
-                <div>
-                  <Button>Start tournament now</Button>
-                </div>
-              ) : (
-                <div>
-                  <span
-                    className={`${getStatusStyle(tournament.status)} rounded-full p-2 text-white`}
-                  >
-                    {tournament.status}
-                  </span>
-                </div>
-              )}
+              <div>
+                <span
+                  className={`${getStatusStyle(tournament.status)} rounded-full p-2 text-white`}
+                >
+                  {tournament.status}
+                </span>
+              </div>
+              <div className="mt-5">
+                <TournamentCombobox tournamentId={tournament.id} />
+              </div>
             </span>
           </CardContent>
         </Card>
