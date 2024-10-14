@@ -7,6 +7,7 @@ export type TournamentData = {
   max_participants: number;
   hosted_by: string;
   participants: string[];
+  tournament_id?: number;
 };
 
 export type TournamentStatus = "PENDING" | "ONGOING" | "COMPLETED" | "CANCELED";

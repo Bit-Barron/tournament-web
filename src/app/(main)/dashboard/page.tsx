@@ -65,6 +65,7 @@ export default function MainPage() {
               tournament_name: tournament.tournament_name,
               start_date: tournament.start_date,
               status: tournament.status,
+              tournament_id: tournament.id,
             })) as any
           }
         />
