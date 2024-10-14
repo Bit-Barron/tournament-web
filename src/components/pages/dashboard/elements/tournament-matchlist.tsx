@@ -3,11 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { TournamentData } from "@/types/tournament";
+import { useRouter } from "next/navigation";
 
 export const UpcomingMatches: React.FC<{ newMatches?: TournamentData[] }> = ({
   newMatches,
 }) => {
   const matches = newMatches?.filter((type) => type.status === "PENDING");
+  const router = useRouter();
   return (
     <Card className="col-span-2 text-white">
       <CardHeader className="pb-2">
@@ -42,6 +44,9 @@ export const UpcomingMatches: React.FC<{ newMatches?: TournamentData[] }> = ({
                     variant="outline"
                     size="sm"
                     className="border-gray-700 bg-transparent text-white hover:bg-gray-800"
+                    onClick={() =>
+                      router.push(`/dashboard/tournament/${match.id}`)
+                    }
                   >
                     View
                   </Button>
