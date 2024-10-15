@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { TournamentData } from "@/types/tournament";
@@ -24,37 +25,37 @@ export const UpcomingMatches: React.FC<{ newMatches?: TournamentData[] }> = ({
             {matches && matches.length > 0 ? (
               matches.map((match, index) => {
                 return (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between border-b border-gray-800 py-4 last:border-b-0"
-                  >
-                    <div>
-                      <p className="text-sm font-medium">
-                        {match.tournament_name}
-                      </p>
-                      <p className="text-xs text-gray-400">
-                        {new Date(match.start_date)
-                          .toLocaleDateString(undefined, {
-                            day: "2-digit",
-                            month: "2-digit",
-                            year: "numeric",
-                          })
-                          .replace(/\//g, ".")}
-                      </p>
+                  <section key={index}>
+                    <div className="flex items-center justify-between border-gray-800 py-4 last:border-b-0">
+                      <div>
+                        <p className="text-sm font-medium">
+                          {match.tournament_name}
+                        </p>
+                        <p className="text-xs text-gray-400">
+                          {new Date(match.start_date)
+                            .toLocaleDateString(undefined, {
+                              day: "2-digit",
+                              month: "2-digit",
+                              year: "numeric",
+                            })
+                            .replace(/\//g, ".")}
+                        </p>
+                      </div>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="border-gray-700 bg-transparent hover:bg-gray-800"
+                        onClick={() =>
+                          router.push(
+                            `/dashboard/tournament/${match.tournament_id}`,
+                          )
+                        }
+                      >
+                        View
+                      </Button>
                     </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="border-gray-700 bg-transparent hover:bg-gray-800"
-                      onClick={() =>
-                        router.push(
-                          `/dashboard/tournament/${match.tournament_id}`,
-                        )
-                      }
-                    >
-                      View
-                    </Button>
-                  </div>
+                    <Separator />
+                  </section>
                 );
               })
             ) : (
