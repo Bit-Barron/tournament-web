@@ -12,7 +12,7 @@
 # next.js
 /.next/
 /out/
-
+pnpm-lock.yaml
 # production
 /build
 .env
