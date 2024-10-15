@@ -213,6 +213,7 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
             discord_id,
             username,
             brawlstars_id,
+            
           },
         });
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { TournamentHook } from "@/components/hooks/tournament-hook";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -61,7 +61,7 @@ export const ParticipantList = () => {
     if (!participants) return;
     for (const participant of participants) {
       try {
-        const test = await sendUserMutation.mutateAsync({
+        await sendUserMutation.mutateAsync({
           roundNumber: selectedRound,
           username: participant.username,
           brawlstars_id: participant.brawlstars_id,
