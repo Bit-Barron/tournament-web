@@ -67,8 +67,6 @@ export const ParticipantList = () => {
           brawlstars_id: participant.brawlstars_id,
           discord_id: participant.discord_id,
         });
-
-        console.log(test);
       } catch (error) {
         toast.error(`Error sending data for ${participant.username}`);
       }
