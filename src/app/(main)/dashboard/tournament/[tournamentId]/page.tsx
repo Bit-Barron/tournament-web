@@ -60,9 +60,6 @@ const Page = () => {
                   {tournament.status}
                 </span>
               </div>
-              <div className="mt-5">
-                <TournamentCombobox tournamentId={tournament.id} />
-              </div>
             </span>
           </CardContent>
         </Card>
