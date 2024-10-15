@@ -48,6 +48,19 @@ const layout: React.FC<layoutProps> = async ({ children, params }) => {
         return data;
       },
     }),
+
+    queryClient.prefetchQuery({
+      queryKey: ["tournament-winners", params.tournamentId],
+      queryFn: async () => {
+        const data = handleEden(
+          await rpc.api.tournament["tournament-winners"][
+            params.tournamentId
+          ].get(),
+        );
+
+        return data;
+      },
+    }),
   ]);
 
   return (

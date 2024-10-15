@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { UserHook } from "@/components/hooks/user-hook";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ThemeToggle } from "@/components/utils/theme-switch";
+import { ThemeToggle } from "@/components/container/navbar/theme-switch";
 import { CreateTournament } from "@/components/pages/dashboard/tournament-create";
 
 export const Navbar = () => {
