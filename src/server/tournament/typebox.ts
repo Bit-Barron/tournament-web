@@ -12,7 +12,6 @@ export const changeTournamentStatusSchema = t.Object({
     t.Literal("ONGOING"),
     t.Literal("CANCELED"),
     t.Literal("COMPLETED"),
-
   ]),
   tournamentId: t.Number({ minLength: 1, maxLength: 128 }),
 });
@@ -29,7 +28,7 @@ export const tournamentCreateSchema = t.Object({
   tournament_name: t.String({ minLength: 1, maxLength: 128 }),
   game_type: t.Enum(GAMETYPE),
   max_participants: t.Number(),
-  start_date: t.Date(),
+  start_date: t.String(),
   hosted_by: t.String({ minLength: 1, maxLength: 128 }),
 });
 

@@ -6,7 +6,7 @@ export interface TournamentState {
   tournamentName: string;
   gameType: GameType;
   maxParticipants: number;
-  startDate?: Date;
+  startDate: string;
   hostedBy?: string;
 }
 
@@ -14,7 +14,7 @@ export const TournamentStore = proxy<TournamentState>({
   tournamentName: "Tournament",
   gameType: "SOLO",
   maxParticipants: 60,
-  startDate: new Date(),
+  startDate: new Date().toISOString(),
   hostedBy: "admin",
 });
 

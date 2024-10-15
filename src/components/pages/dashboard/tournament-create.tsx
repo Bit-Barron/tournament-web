@@ -33,15 +33,15 @@ export const CreateTournament: React.FC<CreateTournamentProps> = ({
         game_type: tournamentStore.gameType as GAMETYPE,
         max_participants: tournamentStore.maxParticipants,
         hosted_by: "admin",
-        start_date: new Date(),
+        start_date: tournamentStore.startDate as any,
         tournament_name: tournamentStore.tournamentName,
       })
       .then(() => {
         toast.success("Tournament created successfully");
         setOpen(false);
       })
-      .catch(() => {
-        toast.error("Failed to create tournament");
+      .catch((error) => {
+        toast.error(`Failed to create tournament: ${error.message}`);
       });
   };
 
@@ -61,19 +61,23 @@ export const CreateTournament: React.FC<CreateTournamentProps> = ({
           <Input
             placeholder="Tournament Name"
             value={tournamentStore.tournamentName}
-            onChange={(e) => tournamentStore.tournamentName}
+            onChange={(e) => (TournamentStore.tournamentName = e.target.value)}
+            type="text"
             required
           />
           <Input
+            type="text"
             placeholder="Game Type"
             value={tournamentStore.gameType}
-            onChange={(e) => tournamentStore.gameType}
             required
           />
           <Input
             placeholder="Max Participants"
             value={tournamentStore.maxParticipants}
-            onChange={(e) => tournamentStore.maxParticipants}
+            type="number"
+            onChange={(e) =>
+              (TournamentStore.maxParticipants = Number(e.target.value))
+            }
             required
           />
           <Input
@@ -84,7 +88,7 @@ export const CreateTournament: React.FC<CreateTournamentProps> = ({
           />
           <Input
             placeholder="Hosted By"
-            value={tournamentStore.startDate as unknown as string}
+            value={tournamentStore.startDate as any}
             disabled
             required
           />
