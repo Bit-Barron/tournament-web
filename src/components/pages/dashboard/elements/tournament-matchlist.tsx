@@ -12,7 +12,7 @@ export const UpcomingMatches: React.FC<{ newMatches?: TournamentData[] }> = ({
   const router = useRouter();
 
   return (
-    <Card className="col-span-2 text-white">
+    <Card className="col-span-2">
       <CardHeader className="pb-2">
         <CardTitle className="text-xl font-semibold">
           Upcoming Matches
@@ -45,7 +45,7 @@ export const UpcomingMatches: React.FC<{ newMatches?: TournamentData[] }> = ({
                     <Button
                       variant="outline"
                       size="sm"
-                      className="border-gray-700 bg-transparent text-white hover:bg-gray-800"
+                      className="border-gray-700 bg-transparent hover:bg-gray-800"
                       onClick={() =>
                         router.push(
                           `/dashboard/tournament/${match.tournament_id}`,
