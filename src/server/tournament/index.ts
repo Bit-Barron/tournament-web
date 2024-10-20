@@ -199,7 +199,23 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
     async (ctx) => {
       const { roundNumber, username, brawlstars_id, discord_id } = ctx.body;
       const new_brawlstars_id = "28GR92Y998";
+      try {
+        const response = await axios.post(
+          "http://0.0.0.0:8000/register-participants",
+          {
+            roundNumber,
+            username,
+            brawlstars_id: new_brawlstars_id,
+            discord_id,
+          },
+        );
+
+        console.log(response.data);
+      } catch (err) {
+        throw new InternalServerError(err as string);
+      }
     },
+
     { body: sendUserSchema },
   )
   .post(
@@ -213,7 +229,6 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
             discord_id,
             username,
             brawlstars_id,
-            
           },
         });
 
@@ -244,4 +259,8 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
     },
 
     { body: changeTournamentStatusSchema },
-  );
+  )
+  .get("/tournament-rounds", async (ctx) => {
+    const tournamentRounds = await prisma.tournamentRound.findMany();
+    return tournamentRounds;
+  });

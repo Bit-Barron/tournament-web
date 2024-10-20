@@ -16,6 +16,11 @@ export const TournamentHook = () => {
     queryFn: async () => handleEden(await rpc.api.tournament.user.get()),
   });
 
+  const tournamentRoundQuery = useQuery({
+    queryKey: ["tournament-round"],
+    queryFn: async () =>
+      handleEden(await rpc.api.tournament["tournament-rounds"].get()),
+  });
   const tournamentIdQuery = useQuery({
     queryKey: ["tournament", params.tournamentId],
     enabled: !!params.tournamentId,
@@ -107,6 +112,7 @@ export const TournamentHook = () => {
     tournamentQuery,
     tournamentUserQuery,
     tournamentIdQuery,
+    tournamentRoundQuery,
     tournamentMutation,
   };
 };
