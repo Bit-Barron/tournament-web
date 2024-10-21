@@ -12,3 +12,4 @@ export default function TournamentEntry() {
     redirect("/login");
   }
 }
+
