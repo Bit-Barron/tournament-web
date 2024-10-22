@@ -30,7 +30,7 @@ export const OngoingTournaments: React.FC<{ tournaments: Tournament[] }> = ({
             No ongoing tournaments
           </p>
         )}
-        <ScrollArea className="h-[300px]">
+        <ScrollArea className="">
           <div className="pr-4">
             {tournaments.map((tournament) => (
               <div
