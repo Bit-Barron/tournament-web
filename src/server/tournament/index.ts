@@ -51,6 +51,8 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
         start_date,
         hosted_by,
       } = ctx.body;
+
+      console.log(ctx.body);
       const tournament = await prisma.tournament.create({
         data: {
           tournament_name,
@@ -60,6 +62,8 @@ export const tournamentRoute = new Elysia({ prefix: "/tournament" })
           hosted_by,
         },
       });
+
+      console.log(tournament);
 
       return tournament;
     },

@@ -33,7 +33,7 @@ export const CreateTournament: React.FC<CreateTournamentProps> = ({
         game_type: tournamentStore.gameType as GAMETYPE,
         max_participants: tournamentStore.maxParticipants,
         hosted_by: "admin",
-        start_date: tournamentStore.startDate as any,
+        start_date: tournamentStore.startDate,
         tournament_name: tournamentStore.tournamentName,
       })
       .then(() => {

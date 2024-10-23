@@ -25,11 +25,32 @@ export const participantSchema = t.Object({
 });
 
 export const tournamentCreateSchema = t.Object({
-  tournament_name: t.String({ minLength: 1, maxLength: 128 }),
-  game_type: t.Enum(GAMETYPE),
-  max_participants: t.Number(),
-  start_date: t.String(),
-  hosted_by: t.String({ minLength: 1, maxLength: 128 }),
+  tournament_name: t.String({
+    minLength: 1,
+    maxLength: 128,
+    error: "Tournament name must be between 1 and 128 characters",
+  }),
+
+  game_type: t.Enum(GAMETYPE, {
+    error: "Game type must be either SOLO, DUO, or TRIOS",
+  }),
+
+  max_participants: t.Number({
+    minimum: 1,
+    maximum: 1000,
+    error: "Maximum participants must be between 1 and 1000",
+  }),
+
+  start_date: t.String({
+    format: "date-time",
+    error: "Start date must be a valid date string",
+  }),
+
+  hosted_by: t.String({
+    minLength: 1,
+    maxLength: 128,
+    error: "Host name must be between 1 and 128 characters",
+  }),
 });
 
 export const tournamentWinnerSchema = t.Object({
