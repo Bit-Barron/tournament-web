@@ -21,8 +21,8 @@ interface LoginPageProps {}
 export default function LoginPage(props: LoginPageProps) {
   const router = useRouter();
   const { loginMutation } = AuthHook();
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [username, setUsername] = useState<string>("admin");
+  const [password, setPassword] = useState<string>("admin");
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
