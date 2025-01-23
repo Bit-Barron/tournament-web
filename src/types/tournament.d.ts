@@ -12,6 +12,7 @@ export type TournamentData = {
 
 export type TournamentStatus = "PENDING" | "ONGOING" | "COMPLETED" | "CANCELED";
 
+
 export type Participant = {
   id: number;
   username: string;
