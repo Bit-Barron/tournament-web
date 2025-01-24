@@ -11,6 +11,7 @@ A comprehensive web platform for managing gaming tournaments with advanced featu
 - Join/Leave Tournaments
 - View Tournament Status
 - Live Match Updates
+- 
 
 ### Admin Features
 - Create and Manage Tournaments
