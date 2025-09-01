@@ -32,3 +32,5 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
 RUN npm install -g pnpm
 CMD ["pnpm", "run", "start"]
+
+
