@@ -1,12 +1,8 @@
 // Prisma schema
 
 generator client {
-  provider      = "prisma-client-js"
-  binaryTargets = ["linux-musl", "native"]  // Alpine == musl
+  provider = "prisma-client-js"
 }
-
-
-
 
 datasource db {
   provider = "postgresql"
